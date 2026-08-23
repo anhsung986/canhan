@@ -227,6 +227,7 @@
         .btn-facebook:hover { border-color: #1877f2; box-shadow: 0 0 25px rgba(24, 119, 242, 0.45); color: #4b97f5; }
         .btn-youtube:hover { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.45); color: #ff4d4d; }
         .btn-email:hover { border-color: #ffaa00; box-shadow: 0 0 25px rgba(255, 170, 0, 0.45); color: #ffbb33; }
+        .btn-game:hover { border-color: #00ffcc; box-shadow: 0 0 25px rgba(0, 255, 204, 0.45); color: #33ffdd; }
         .btn-copy { border-color: rgba(0, 242, 254, 0.3); background: rgba(0, 242, 254, 0.06); }
         .btn-copy:hover { border-color: #00f2fe; box-shadow: 0 0 25px rgba(0, 242, 254, 0.5); color: #00f2fe; }
 
@@ -366,6 +367,7 @@
             <div class="menu-tag" onclick="toggleMenu(event)" title="Mở Menu"><i class="fas fa-bars"></i></div>
             <div class="menu-dropdown" id="menuDropdown">
                 <a class="menu-item" onclick="switchPage('home'); closeMenu();">Trang chủ</a>
+                <a class="menu-item" href="game.html">Danh Sách Game</a>
                 <a class="menu-item" href="https://love.ilove.gt.tc/" target="_blank">Yêu I Love</a>
                 <a class="menu-item" href="https://cd.chidoi.gt.tc/" target="_blank">Chi Đội</a>
                 <a class="menu-item" href="https://server.arcanedungeon.gt.tc/" target="_blank">Website server Minecraft</a>
@@ -411,6 +413,12 @@
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </div>
 
+                <!-- Nút chuyển sang trang Game (game.html) -->
+                <a href="game.html" class="btn btn-game">
+                    <span class="btn-left"><i class="fas fa-gamepad" style="color: #00ffcc;"></i> Danh Sách Game</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+
                 <!-- Nút Copy STK -->
                 <div class="btn btn-copy" id="donateBtn" onclick="copySTK('0123456789 - MB Bank')">
                     <span class="btn-left" style="color: #00f2fe;">
@@ -430,9 +438,7 @@
             <h1 style="font-size: 20px; margin-bottom: 5px;">DANH SÁCH EMAIL</h1>
             <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 10px;">Bấm vào từng email để sao chép nhanh:</p>
 
-            <!-- Danh sách chứa các email phân rõ chính/phụ -->
             <div class="email-list-container">
-                <!-- Email chính -->
                 <div class="email-box main-email" onclick="copyEmail('anhsung986@gmail.com')">
                     <div class="email-info">
                         <span class="email-badge badge-main">Email Chính</span>
@@ -441,7 +447,6 @@
                     <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
                 </div>
                 
-                <!-- Email phụ 1 -->
                 <div class="email-box" onclick="copyEmail('Anhvnmc7@gmail.com')">
                     <div class="email-info">
                         <span class="email-badge badge-sub">Email Phụ</span>
@@ -450,7 +455,6 @@
                     <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
                 </div>
 
-                <!-- Email phụ 2 -->
                 <div class="email-box" onclick="copyEmail('anhvnmc2012@gmail.com')">
                     <div class="email-info">
                         <span class="email-badge badge-sub">Email Phụ</span>
@@ -459,7 +463,6 @@
                     <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
                 </div>
 
-                <!-- Email phụ 3 -->
                 <div class="email-box" onclick="copyEmail('anhvnmc394@gmail.com')">
                     <div class="email-info">
                         <span class="email-badge badge-sub">Email Phụ</span>
@@ -484,7 +487,7 @@
         // Tạo hiệu ứng hạt bay ngẫu nhiên
         const pContainer = document.getElementById('particles-container');
         function createParticle() {
-            const particle = document.createElement('div');
+          const particle = document.createElement('div');
             particle.classList.add('particle');
             
             const size = Math.random() * 4 + 2; 
