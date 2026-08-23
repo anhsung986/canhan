@@ -28,64 +28,55 @@
             border: 2px solid #00ffcc; box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
         }
         h1 {
-            font-family: 'Orbitron', sans-serif; font-size: 22px; margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif; font-size: 20px; margin-bottom: 5px;
             background: linear-gradient(135deg, #ffffff 30%, #00ffcc 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;
         }
         
-        /* Khung nhập mật khẩu */
-        #authSection {
-            margin: 20px 0;
+        /* Khung nhập mật khẩu mở khóa MK */
+        .unlock-box {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 15px;
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
         .pass-input {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 12px;
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 10px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(0, 255, 204, 0.4);
             color: #ffffff;
-            font-size: 13px;
-            text-align: center;
+            font-size: 12px;
             outline: none;
             transition: 0.3s;
         }
         .pass-input:focus {
             border-color: #00ffcc;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
         }
         .btn-submit {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #00ffcc, #0077ff);
+            padding: 0 14px;
+            border-radius: 10px;
+            background: #00ffcc;
             color: #070514;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             border: none;
             cursor: pointer;
             transition: 0.3s;
         }
         .btn-submit:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+            background: #33ffdd;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
         }
 
-        /* Danh sách game sau khi mở khóa */
-        #contentSection {
-            display: none;
-            animation: fadeIn 0.4s ease forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
+        /* Danh sách game (hiện tên & tên tài khoản, ẩn mật khẩu) */
         .game-list-container {
-            max-height: 280px; overflow-y: auto; margin: 15px 0; display: flex; flex-direction: column; gap: 10px; padding-right: 4px;
+            max-height: 260px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; text-align: left;
         }
         .game-list-container::-webkit-scrollbar { width: 4px; }
         .game-list-container::-webkit-scrollbar-thumb { background: rgba(0, 255, 204, 0.5); border-radius: 4px; }
@@ -95,7 +86,7 @@
             border: 1px solid rgba(0, 255, 204, 0.3);
             border-radius: 12px; padding: 12px 14px;
             display: flex; flex-direction: column; gap: 4px;
-            color: #ffffff; font-size: 13px; text-align: left;
+            color: #ffffff; font-size: 13px;
             transition: 0.3s;
         }
         .game-box:hover {
@@ -108,6 +99,13 @@
         .game-info {
             color: rgba(255, 255, 255, 0.7); font-size: 12px;
         }
+        .secret-pass {
+            color: #ff007f;
+            background: rgba(255, 0, 127, 0.1);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
 
         .btn-back {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -117,7 +115,7 @@
         }
         .btn-back:hover { background: rgba(255, 255, 255, 0.12); border-color: #00ffcc; color: #00ffcc; }
 
-        /* Toast thông báo lỗi/thành công */
+        /* Toast thông báo */
         .toast {
             position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #ff007f, #7f00ff); color: #ffffff; 
@@ -128,54 +126,50 @@
         }
         .toast.show { bottom: 30px; opacity: 1; }
 
-        footer { margin-top: 20px; font-size: 10px; color: rgba(255, 255, 255, 0.4); letter-spacing: 2px; }
+        footer { margin-top: 15px; font-size: 10px; color: rgba(255, 255, 255, 0.4); letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
     <div class="glass-card">
         <div class="avatar-container">
-            <i class="fas fa-lock" id="lockIcon" style="font-size: 28px; color: #00ffcc;"></i>
+            <i class="fas fa-gamepad" style="font-size: 30px; color: #00ffcc;"></i>
         </div>
         
-        <h1 id="pageTitle">BẢO MẬT TÀI KHOẢN</h1>
-        
-        <!-- PHẦN NHẬP MẬT KHẨU -->
-        <div id="authSection">
-            <p style="font-size: 11px; color: rgba(255,255,255,0.6);">Vui lòng nhập mật khẩu để xem thông tin tài khoản:</p>
+        <h1>DANH SÁCH GAME</h1>
+        <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Tên game và tài khoản hiển thị sẵn. Nhập mật khẩu để mở khóa MK:</p>
+
+        <!-- Khung nhập mật khẩu để hiện MK -->
+        <div class="unlock-box">
             <input type="password" id="passInput" class="pass-input" placeholder="Nhập mật khẩu..." onkeypress="checkEnter(event)">
-            <button class="btn-submit" onclick="verifyPassword()">Mở Khóa</button>
+            <button class="btn-submit" onclick="unlockPasswords()">Mở MK</button>
         </div>
 
-        <!-- PHẦN HIỂN THỊ THÔNG TIN SAU KHI MỞ KHÓA -->
-        <div id="contentSection">
-            <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 10px;">Tên tài khoản & Mật khẩu các game của bạn:</p>
-            
-            <div class="game-list-container">
-                <!-- Game 1 -->
-                <div class="game-box">
-                    <span class="game-title"><i class="fas fa-cube"></i> Minecraft</span>
-                    <span class="game-info">Tên: <b>AnhSungMC</b> | MK: <code>sungtuananh2012@toiyeutoi</code></span>
-                </div>
-                <!-- Game 2 -->
-                <div class="game-box">
-                    <span class="game-title"><i class="fas fa-shield-alt"></i> Roblox</span>
-                    <span class="game-info">Tên: <b>tuananh212op</b> | MK: <code>sungtuananh2012@toiyeutoi</code></span>
-                </div>
-                <!-- Game 3 -->
-                <div class="game-box">
-                    <span class="game-title"><i class="fas fa-fire"></i> Liên Quân Mobile</span>
-                    <span class="game-info">Tên: <b>AnhSùng_Official</b> | MK: <code>sungtuananh2012@toiyeutoi</code></span>
-                </div>
-                <!-- Game 4 -->
-                <div class="game-box">
-                    <span class="game-title"><i class="fas fa-crosshairs"></i> Free Fire</span>
-                    <span class="game-info">Tên: <b>AS_Gaming</b> | MK: <code>sungtuananh2012@toiyeutoi</code></span>
-                </div>
+        <!-- Danh sách hiển thị tên game & tài khoản công khai, mật khẩu bị ẩn -->
+        <div class="game-list-container">
+            <!-- Game 1 -->
+            <div class="game-box">
+                <span class="game-title"><i class="fas fa-cube"></i> Minecraft</span>
+                <span class="game-info">Tên: <b>AnhSungMC</b> | MK: <span class="secret-pass" id="pass1">••••••••••••</span></span>
+            </div>
+            <!-- Game 2 -->
+            <div class="game-box">
+                <span class="game-title"><i class="fas fa-shield-alt"></i> Roblox</span>
+                <span class="game-info">Tên: <b>tuananh212op</b> | MK: <span class="secret-pass" id="pass2">••••••••••••</span></span>
+            </div>
+            <!-- Game 3 -->
+            <div class="game-box">
+                <span class="game-title"><i class="fas fa-fire"></i> Liên Quân Mobile</span>
+                <span class="game-info">Tên: <b>AnhSùng_Official</b> | MK: <span class="secret-pass" id="pass3">••••••••••••</span></span>
+            </div>
+            <!-- Game 4 -->
+            <div class="game-box">
+                <span class="game-title"><i class="fas fa-crosshairs"></i> Free Fire</span>
+                <span class="game-info">Tên: <b>AS_Gaming</b> | MK: <span class="secret-pass" id="pass4">••••••••••••</span></span>
             </div>
         </div>
 
-        <div style="margin-top: 15px;">
+        <div>
             <a href="index.html" class="btn-back">
                 <i class="fas fa-arrow-left"></i> Quay lại trang chủ
             </a>
@@ -190,21 +184,22 @@
     <script>
         function checkEnter(e) {
             if (e.key === 'Enter') {
-                verifyPassword();
+                unlockPasswords();
             }
         }
 
-        function verifyPassword() {
+        function unlockPasswords() {
             const inputVal = document.getElementById('passInput').value;
             const correctPass = 'sungtuananh2012@toiyeutoi';
 
             if (inputVal === correctPass) {
-                // Ẩn khung nhập mật khẩu, hiện nội dung game
-                document.getElementById('authSection').style.display = 'none';
-                document.getElementById('contentSection').style.display = 'block';
-                document.getElementById('pageTitle').innerText = 'DANH SÁCH TÀI KHOẢN';
-                document.getElementById('lockIcon').className = 'fas fa-unlock-alt';
-                showToast("🔓 Mở khóa thành công!");
+                // Hiện mật khẩu thực tế lên các thẻ
+                document.getElementById('pass1').innerText = 'sungtuananh2012@toiyeutoi';
+                document.getElementById('pass2').innerText = 'sungtuananh2012@toiyeutoi';
+                document.getElementById('pass3').innerText = 'sungtuananh2012@toiyeutoi';
+                document.getElementById('pass4').innerText = 'sungtuananh2012@toiyeutoi';
+                
+                showToast("🔓 Đã mở khóa hiển thị mật khẩu!");
             } else {
                 showToast("❌ Mật khẩu không chính xác!");
             }
@@ -218,5 +213,4 @@
         }
     </script>
 </body>
-  </html>
-                  
+</html>
