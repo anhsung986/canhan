@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anh Sùng - Ultimate Hub</title>
+    <!-- Nhúng Font & Icon thế hệ mới -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(135deg, #070514 0%, #160a2a 50%, #031024 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Hiệu ứng hạt bay nền */
+        #particles-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 0, 127, 0.6);
+            box-shadow: 0 0 10px rgba(127, 0, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.9; }
+            100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
+        }
+
+        /* Hiệu ứng sóng click chuột */
+        .click-ripple {
+            position: absolute;
+            border: 2px solid #ff007f;
+            border-radius: 50%;
+            background: rgba(255, 0, 127, 0.15);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: rippleEffect 0.6s cubic-bezier(0, 0.2, 0.8, 1) forwards;
+            z-index: 9999;
+        }
+        @keyframes rippleEffect {
+            0% { width: 0; height: 0; opacity: 1; }
+            100% { width: 90px; height: 90px; opacity: 0; }
+        }
+
+        /* Khung kính mờ cao cấp */
+        .glass-card {
+            background: rgba(20, 15, 35, 0.45);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(255, 0, 127, 0.05);
+            padding: 40px 24px 30px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+            margin: auto;
+        }
+        
+        .glass-card.clean-mode {
+            background: rgba(8, 6, 15, 0.92);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            border-color: rgba(255, 0, 127, 0.4);
+            box-shadow: 0 0 35px rgba(255, 0, 127, 0.2);
+        }
+
+        /* Menu thả xuống */
+        .menu-wrapper {
+            position: absolute;
+            top: 20px; left: 20px;
+            z-index: 10;
+            text-align: left;
+        }
+        .menu-tag {
+            color: rgba(255, 255, 255, 0.7); 
+            cursor: pointer; 
+            transition: 0.3s;
+            font-size: 16px;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .menu-tag:hover { color: #ff007f; background: rgba(255, 0, 127, 0.12); border-color: rgba(255, 0, 127, 0.4); }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 48px; left: 0;
+            background: rgba(12, 9, 24, 0.96);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            width: 220px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            max-height: 0px; 
+            overflow-y: auto; 
+            opacity: 0;
+            pointer-events: none;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            padding: 0;
+        }
+        .menu-dropdown.open {
+            max-height: 260px;
+            opacity: 1;
+            pointer-events: auto;
+            padding: 8px 0;
+        }
+
+        .menu-dropdown::-webkit-scrollbar { width: 4px; }
+        .menu-dropdown::-webkit-scrollbar-thumb { background: rgba(255, 0, 127, 0.5); border-radius: 4px; }
+
+        .menu-item {
+            display: block;
+            padding: 12px 18px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: 0.2s;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item:hover {
+            background: rgba(255, 0, 127, 0.12);
+            color: #ff007f;
+            padding-left: 22px;
+        }
+
+        /* Avatar */
+        .avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 18px;
+        }
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(60deg, #ff007f, #7f00ff, #00f2fe, #ff007f);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: gradientBorder 5s ease infinite;
+        }
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .avatar {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: #0d091a;
+            display: flex; justify-content: center; align-items: center;
+            color: #ffffff; font-size: 34px; font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px; 
+            margin-bottom: 22px; 
+            letter-spacing: 2.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #ff007f 70%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        /* Danh sách nút */
+        .button-list { display: flex; flex-direction: column; gap: 14px; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 20px; border-radius: 16px;
+            text-decoration: none; font-size: 14px; font-weight: 600; color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-left { display: flex; align-items: center; text-align: left; z-index: 1; }
+        .btn i { margin-right: 14px; font-size: 18px; width: 22px; text-align: center; }
+        .arrow-icon { font-size: 11px; opacity: 0.4; transition: 0.3s; z-index: 1; }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+        .btn:hover .arrow-icon { opacity: 1; transform: translateX(4px); }
+
+        /* Hover màu sắc từng nút */
+        .btn-discord:hover { border-color: #5865F2; box-shadow: 0 0 25px rgba(88, 101, 242, 0.45); color: #737ef4; }
+        .btn-tiktok:hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(255, 0, 85, 0.45); color: #ff3377; }
+        .btn-facebook:hover { border-color: #1877f2; box-shadow: 0 0 25px rgba(24, 119, 242, 0.45); color: #4b97f5; }
+        .btn-youtube:hover { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.45); color: #ff4d4d; }
+        .btn-email:hover { border-color: #ffaa00; box-shadow: 0 0 25px rgba(255, 170, 0, 0.45); color: #ffbb33; }
+        .btn-game:hover { border-color: #00ffcc; box-shadow: 0 0 25px rgba(0, 255, 204, 0.45); color: #33ffdd; }
+        .btn-copy { border-color: rgba(0, 242, 254, 0.3); background: rgba(0, 242, 254, 0.06); }
+        .btn-copy:hover { border-color: #00f2fe; box-shadow: 0 0 25px rgba(0, 242, 254, 0.5); color: #00f2fe; }
+
+        /* Giao diện Trang Email riêng biệt */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .email-list-container {
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .email-list-container::-webkit-scrollbar { width: 4px; }
+        .email-list-container::-webkit-scrollbar-thumb { background: rgba(255, 170, 0, 0.5); border-radius: 4px; }
+
+        .email-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 170, 0, 0.4);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+        }
+        .email-box.main-email {
+            border: 1.5px solid #ffaa00;
+            background: rgba(255, 170, 0, 0.08);
+        }
+        .email-box:hover {
+            background: rgba(255, 170, 0, 0.15);
+            border-color: #ffbb33;
+        }
+        
+        .email-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .email-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: max-content;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+        .badge-main { background: #ffaa00; color: #070514; }
+        .badge-sub { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7); }
+
+        .email-text {
+            font-size: 13px;
+            color: #ffbb33;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            margin-top: 5px;
+        }
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #ff007f;
+            color: #ff007f;
+        }
+
+        /* Toast thông báo */
+        .toast {
+            position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff007f, #7f00ff); color: #ffffff; 
+            padding: 12px 30px; border-radius: 35px; font-weight: 600; font-size: 13px;
+            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.5);
+            z-index: 99999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
+            width: max-content; max-width: 90%; text-align: center;
+        }
+        .toast.show { bottom: 35px; opacity: 1; }
+
+        /* Các nút điều khiển góc phải */
+        .control-tags {
+            position: absolute; top: 20px; right: 20px;
+            display: flex; gap: 10px; font-size: 14px;
+            z-index: 10;
+        }
+        .icon-tag {
+            color: rgba(255,255,255,0.7); cursor: pointer; transition: 0.3s;
+            width: 38px; height: 38px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .icon-tag:hover { color: #ff007f; background: rgba(255, 0, 127, 0.12); border-color: rgba(255, 0, 127, 0.4); }
+
+        footer { margin-top: 28px; font-size: 10px; color: rgba(255, 255, 255, 0.4); letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <!-- Hiệu ứng hạt nền -->
+    <div id="particles-container"></div>
+
+    <div class="glass-card" id="mainCard">
+        
+        <!-- Menu thả xuống -->
+        <div class="menu-wrapper">
+            <div class="menu-tag" onclick="toggleMenu(event)" title="Mở Menu"><i class="fas fa-bars"></i></div>
+            <div class="menu-dropdown" id="menuDropdown">
+                <a class="menu-item" onclick="switchPage('home'); closeMenu();">Trang chủ</a>
+                <a class="menu-item" href="game.html">Danh Sách Game</a>
+                <a class="menu-item" href="https://love.ilove.gt.tc/" target="_blank">Yêu I Love</a>
+                <a class="menu-item" href="https://cd.chidoi.gt.tc/" target="_blank">Chi Đội</a>
+                <a class="menu-item" href="https://server.arcanedungeon.gt.tc/" target="_blank">Website server Minecraft</a>
+                <a class="menu-item" onclick="handleMenuDonate()">Donate STK</a>
+            </div>
+        </div>
+
+        <!-- Nút tính năng phụ góc trên phải -->
+        <div class="control-tags">
+            <div class="icon-tag" onclick="toggleCleanMode()" title="Bật/Tắt chế độ tối giản"><i class="fas fa-eye-slash"></i></div>
+            <div class="icon-tag" onclick="sharePage()" title="Sao chép link trang này"><i class="fas fa-share-alt"></i></div>
+        </div>
+
+        <!-- ================= TRANG CHỦ ================= -->
+        <div id="homePage" class="page-section active">
+            <div class="avatar-container">
+                <div class="avatar">AS</div>
+            </div>
+            
+            <h1>ANH SÙNG</h1>
+
+            <div class="button-list">
+                <a href="#" target="_blank" class="btn btn-discord">
+                    <span class="btn-left"><i class="fab fa-discord"></i> Discord</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <a href="https://www.tiktok.com/@tuanh212op" target="_blank" class="btn btn-tiktok">
+                    <span class="btn-left"><i class="fab fa-tiktok"></i> Kênh TikTok</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <a href="https://www.facebook.com/anh.tuan.879658/" target="_blank" class="btn btn-facebook">
+                    <span class="btn-left"><i class="fab fa-facebook-f"></i> Facebook Cá Nhân</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <a href="https://m.youtube.com/@AnhVN_MC" target="_blank" class="btn btn-youtube">
+                    <span class="btn-left"><i class="fab fa-youtube"></i> Kênh YouTube</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                
+                <!-- Nút chuyển sang trang Email -->
+                <div class="btn btn-email" onclick="switchPage('email')">
+                    <span class="btn-left"><i class="fas fa-envelope"></i> Danh Sách Email</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </div>
+
+                <!-- Nút chuyển sang trang Game (game.html) -->
+                <a href="game.html" class="btn btn-game">
+                    <span class="btn-left"><i class="fas fa-gamepad" style="color: #00ffcc;"></i> Danh Sách Game</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+
+                <!-- Nút Copy STK -->
+                <div class="btn btn-copy" id="donateBtn" onclick="copySTK('0123456789 - MB Bank')">
+                    <span class="btn-left" style="color: #00f2fe;">
+                        <i class="fas fa-wallet"></i> Số tài khoản
+                    </span>
+                    <i class="far fa-copy" style="font-size:13px; opacity:0.7;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TRANG EMAIL ================= -->
+        <div id="emailPage" class="page-section">
+            <div class="avatar-container" style="width: 80px; height: 80px; margin-bottom: 12px;">
+                <div class="avatar" style="font-size: 26px;"><i class="fas fa-envelope" style="color: #ffaa00;"></i></div>
+            </div>
+            
+            <h1 style="font-size: 20px; margin-bottom: 5px;">DANH SÁCH EMAIL</h1>
+            <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 10px;">Bấm vào từng email để sao chép nhanh:</p>
+
+            <div class="email-list-container">
+                <div class="email-box main-email" onclick="copyEmail('anhsung986@gmail.com')">
+                    <div class="email-info">
+                        <span class="email-badge badge-main">Email Chính</span>
+                        <span class="email-text">anhsung986@gmail.com</span>
+                    </div>
+                    <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
+                </div>
+                
+                <div class="email-box" onclick="copyEmail('Anhvnmc7@gmail.com')">
+                    <div class="email-info">
+                        <span class="email-badge badge-sub">Email Phụ</span>
+                        <span class="email-text">Anhvnmc7@gmail.com</span>
+                    </div>
+                    <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
+                </div>
+
+                <div class="email-box" onclick="copyEmail('anhvnmc2012@gmail.com')">
+                    <div class="email-info">
+                        <span class="email-badge badge-sub">Email Phụ</span>
+                        <span class="email-text">anhvnmc2012@gmail.com</span>
+                    </div>
+                    <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
+                </div>
+
+                <div class="email-box" onclick="copyEmail('anhvnmc394@gmail.com')">
+                    <div class="email-info">
+                        <span class="email-badge badge-sub">Email Phụ</span>
+                        <span class="email-text">anhvnmc394@gmail.com</span>
+                    </div>
+                    <i class="far fa-copy" style="color: #ffaa00; font-size: 14px;"></i>
+                </div>
+            </div>
+
+            <div class="btn-back" onclick="switchPage('home')">
+                <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+            </div>
+        </div>
+
+        <footer>POWERED BY ANH SÙNG • © 2026</footer>
+    </div>
+
+    <!-- Hộp thông báo Toast -->
+    <div class="toast" id="toastMessage">Đã copy thành công!</div>
+
+    <script>
+        // Tạo hiệu ứng hạt bay ngẫu nhiên
+        const pContainer = document.getElementById('particles-container');
+        function createParticle() {
+          const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            const size = Math.random() * 4 + 2; 
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            particle.style.left = `${Math.random() * 100}vw`; 
+            particle.style.animationDuration = `${Math.random() * 6 + 4}s`; 
+            
+            pContainer.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 10000); 
+        }
+        setInterval(createParticle, 300); 
+
+        // Hiệu ứng sóng năng lượng khi Click chuột
+        window.addEventListener('click', (e) => {
+            if (e.target.closest('.menu-wrapper') || e.target.closest('.control-tags')) return;
+            
+            const ripple = document.createElement('div');
+            ripple.classList.add('click-ripple');
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+            document.body.appendChild(ripple);
+            setTimeout(() => { ripple.remove(); }, 600);
+        });
+
+        // Chuyển đổi qua lại giữa các trang phụ
+        function switchPage(pageId) {
+            const homePage = document.getElementById('homePage');
+            const emailPage = document.getElementById('emailPage');
+
+            homePage.classList.remove('active');
+            emailPage.classList.remove('active');
+
+            if (pageId === 'home') {
+                homePage.classList.add('active');
+            } else if (pageId === 'email') {
+                emailPage.classList.add('active');
+            }
+        }
+
+        // Điều khiển Menu
+        function toggleMenu(event) {
+            event.stopPropagation(); 
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        function closeMenu() {
+            document.getElementById('menuDropdown').classList.remove('open');
+        }
+
+        document.addEventListener('click', () => { closeMenu(); });
+
+        function handleMenuDonate() {
+            closeMenu();
+            setTimeout(() => {
+                copySTK('0123456789 - MB Bank'); 
+            }, 300);
+        }
+
+        // Chế độ tối giản
+        function toggleCleanMode() {
+            const card = document.getElementById('mainCard');
+            card.classList.toggle('clean-mode');
+            showToast(card.classList.contains('clean-mode') ? "👁️ Đã bật Chế độ tối giản!" : "🔮 Đã bật Chế độ kính mờ!");
+        }
+
+        // Sao chép Email
+        function copyEmail(emailToCopy) {
+            navigator.clipboard.writeText(emailToCopy);
+            showToast(`📧 Đã sao chép: ${emailToCopy}`);
+        }
+
+        // Sao chép STK
+        function copySTK(textToCopy) {
+            navigator.clipboard.writeText(textToCopy);
+            showToast("📋 Đã sao chép Số Tài Khoản!");
+        }
+
+        // Sao chép link trang
+        function sharePage() {
+            navigator.clipboard.writeText(window.location.href);
+            showToast("🔗 Đã sao chép liên kết trang cá nhân!");
+        }
+
+        // Hiển thị Toast
+        function showToast(msg) {
+            const toast = document.getElementById("toastMessage");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 2500);
+        }
+    </script>
+</body>
+</html>
