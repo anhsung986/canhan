@@ -27,7 +27,7 @@
         .result-box { margin-top: 30px; padding: 20px; background: #e9ecef; border-left: 4px solid #007BFF; border-radius: 4px; display: none; }
         .result-box h3 { color: #2c3e50; margin-bottom: 10px; font-size: 1.2rem; }
         .result-box p { margin-bottom: 8px; color: #444; }
-        .code-tag { display: inline-block; background: #007BFF; color: white; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-family: monospace; font-size: 1.1rem; }
+        .code-tag { display: inline-block; background: #007BFF; color: white; padding: 5px 12px; border-radius: 4px; font-weight: bold; font-family: monospace; font-size: 1.2rem; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -46,24 +46,25 @@
             <textarea id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web của bạn..."></textarea>
         </div>
 
-        <button type="submit" class="btn">Gửi Yêu Cầu</button>
+        <button type="submit" id="submitBtn" class="btn">Gửi Yêu Cầu</button>
     </form>
 
     <!-- Khu vực hiển thị thông tin ngay sau khi gửi -->
     <div class="result-box" id="resultArea">
         <h3>Gửi yêu cầu thành công!</h3>
-        <p><strong>Mã đơn của bạn:</strong> <span id="resCode" class="code-tag"></span></p>
+        <p><strong>Mã đơn duy nhất của bạn:</strong></p>
+        <div style="margin: 10px 0;"><span id="resCode" class="code-tag"></span></div>
         <p><strong>Họ tên:</strong> <span id="resName"></span></p>
         <p><strong>Nội dung:</strong> <span id="resContent"></span></p>
-        <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">* Hãy lưu lại mã đơn này để tiện theo dõi tiến trình tạo trang cá nhân của bạn trên hệ thống.</p>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">* Vui lòng lưu lại mã đơn này dùng làm mã định danh trang cá nhân của bạn.</p>
     </div>
 
     <a href="index.html" class="back-link">&larr; Quay lại trang chủ</a>
 </div>
 
 <script>
-    // Hàm tự động tạo mã ngẫu nhiên 5 ký tự (gồm chữ và số, không có ký tự đặc biệt)
-    function generateRandomCode() {
+    // Hàm tạo 1 mã ngẫu nhiên duy nhất gồm 5 ký tự (chữ và số, không có ký tự đặc biệt)
+    function generateSingleCode() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
         for (let i = 0; i < 5; i++) {
@@ -73,24 +74,24 @@
     }
 
     document.getElementById('requestForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Chặn tải lại trang mặc định của form
+        e.preventDefault(); // Chặn tải lại trang
 
-        // Lấy dữ liệu người dùng nhập
         const name = document.getElementById('name').value;
         const content = document.getElementById('content').value;
         
-        // Tạo mã ngẫu nhiên 5 ký tự
-        const randomCode = generateRandomCode();
+        // Tạo duy nhất 1 mã
+        const uniqueCode = generateSingleCode();
 
-        // Đổ dữ liệu vào vùng hiển thị bên dưới
-        document.getElementById('resCode').innerText = randomCode;
+        // Đổ dữ liệu ra màn hình
+        document.getElementById('resCode').innerText = uniqueCode;
         document.getElementById('resName').innerText = name;
         document.getElementById('resContent').innerText = content;
 
-        // Hiển thị khung kết quả lên
+        // Hiển thị khung kết quả và ẩn nút gửi để tránh bấm gửi lại tạo mã mới
         document.getElementById('resultArea').style.display = 'block';
+        document.getElementById('submitBtn').style.display = 'none';
 
-        // Cuộn màn hình nhẹ xuống phần kết quả để người dùng dễ nhìn thấy
+        // Cuộn màn hình xuống vùng kết quả
         document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
     });
 </script>
