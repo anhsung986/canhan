@@ -19,9 +19,13 @@
         
         .btn { display: inline-block; background: #007BFF; color: white; padding: 12px 20px; border: none; border-radius: 4px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; text-align: center; text-decoration: none; }
         .btn:hover { background: #0056b3; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
         
         .back-link { display: block; text-align: center; margin-top: 20px; color: #666; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { text-decoration: underline; }
+
+        /* Khung thông báo lỗi hoặc giới hạn */
+        .alert-box { padding: 15px; background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; border-radius: 4px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
 
         /* Khung hiển thị kết quả sau khi gửi */
         .result-box { margin-top: 30px; padding: 20px; background: #e9ecef; border-left: 5px solid #007BFF; border-radius: 4px; display: none; }
@@ -33,13 +37,17 @@
 <body>
 
 <div class="container">
-    <h2>Nhập Yêu Cầu Thiết Kế Web Cá Nhân</h2>
+    <h2>Nhập Yêu Cầu Thiết Kế Web</h2>
     
-    <!-- Bỏ action và method cũ đi, dùng JavaScript xử lý gửi ngầm -->
+    <!-- Cảnh báo nếu IP đã từng tạo trang -->
+    <div class="alert-box" id="ipAlertBox">
+        ⚠️ Thiết bị (IP) của bạn đã tạo một trang cá nhân trên hệ thống trước đó. Mỗi IP chỉ được phép tạo 1 trang duy nhất!
+    </div>
+
     <form id="requestForm">
-        
-        <!-- Trường ẩn chứa mã đơn tự động -->
+        <!-- Các trường ẩn chứa mã đơn và IP -->
         <input type="hidden" name="MaDon" id="hiddenCode">
+        <input type="hidden" name="UserIP" id="hiddenIP">
 
         <div class="form-group">
             <label for="name">Họ và tên của bạn:</label>
@@ -51,10 +59,10 @@
             <textarea name="NoiDung" id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web..." autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
         </div>
 
-        <button type="submit" id="submitBtn" class="btn">Gửi Yêu Cầu & Tạo Mã</button>
+        <button type="submit" id="submitBtn" class="btn">Đang kiểm tra thiết bị...</button>
     </form>
 
-    <!-- Khu vực hiển thị thông tin ngay sau khi bấm gửi -->
+    <!-- Khu vực hiển thị kết quả sau khi bấm gửi -->
     <div class="result-box" id="resultArea">
         <h3>Gửi yêu cầu thành công!</h3>
         <p>Thông tin đã được gửi về hệ thống Email của quản trị viên.</p>
@@ -82,17 +90,54 @@
     const uniqueCode = generateSingleCode();
     document.getElementById('hiddenCode').value = uniqueCode;
 
+    // Kiểm tra IP và trạng thái đã tạo của trình duyệt người dùng ngay khi vào trang
+    window.addEventListener('DOMContentLoaded', async function() {
+        const submitBtn = document.getElementById('submitBtn');
+        
+        try {
+            // Lấy IP công khai của người dùng qua API miễn phí
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+            const userIP = ipData.ip;
+
+            document.getElementById('hiddenIP').value = userIP;
+
+            // Kiểm tra trong bộ nhớ trình duyệt (localStorage) xem IP/máy này đã từng tạo chưa
+            const createdIPs = JSON.parse(localStorage.getItem('st_created_ips') || '[]');
+            
+            if (createdIPs.includes(userIP)) {
+                // Nếu đã tạo rồi -> Khóa form và hiện cảnh báo
+                document.getElementById('ipAlertBox').style.display = 'block';
+                document.getElementById('requestForm').style.display = 'none';
+            } else {
+                // Nếu chưa -> Mở khóa nút gửi
+                submitBtn.innerText = "Gửi Yêu Cầu & Tạo Mã";
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            // Trường hợp lỗi mạng không lấy được IP vẫn cho phép form hoạt động bình thường
+            submitBtn.innerText = "Gửi Yêu Cầu & Tạo Mã";
+            submitBtn.disabled = false;
+        }
+    });
+
     document.getElementById('requestForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Chặn hành động chuyển trang mặc định của form
+        e.preventDefault();
 
         const name = document.getElementById('name').value;
         const content = document.getElementById('content').value;
+        const userIP = document.getElementById('hiddenIP').value;
         const submitBtn = document.getElementById('submitBtn');
 
         submitBtn.innerText = "Đang gửi...";
         submitBtn.disabled = true;
 
-        // Đóng gói dữ liệu form để gửi ngầm tới Formspree
+        // Lưu IP vào bộ nhớ trình duyệt (localStorage) để khóa ngay trên thiết bị này
+        const createdIPs = JSON.parse(localStorage.getItem('st_created_ips') || '[]');
+        createdIPs.push(userIP);
+        localStorage.setItem('st_created_ips', JSON.stringify(createdIPs));
+
+        // Đóng gói dữ liệu gửi ngầm qua Formspree (email của bạn sẽ nhận được cả IP và Mã đơn)
         const formData = new FormData(this);
 
         fetch("https://formspree.io/f/xvkooody", {
@@ -102,7 +147,6 @@
                 'Accept': 'application/json'
             }
         }).then(response => {
-            // Hiển thị thông tin và mã đơn ngay lập tức trên trang hiện tại
             document.getElementById('resCode').innerText = uniqueCode;
             document.getElementById('resName').innerText = name;
             document.getElementById('resContent').innerText = content;
