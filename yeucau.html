@@ -33,16 +33,16 @@
 <body>
 
 <div class="container">
-    <h2>Nhập Yêu Cầu Thiết Kế Web</h2>
+    <h2>Nhập Yêu Cầu Thiết Kế Web Cá Nhân</h2>
     
-    <form id="requestForm" action="https://formspree.io/f/xvkooody" method="POST">
+    <!-- Bỏ action và method cũ đi, dùng JavaScript xử lý gửi ngầm -->
+    <form id="requestForm">
         
         <!-- Trường ẩn chứa mã đơn tự động -->
         <input type="hidden" name="MaDon" id="hiddenCode">
 
         <div class="form-group">
             <label for="name">Họ và tên của bạn:</label>
-            <!-- Thêm các thuộc tính chống tự sửa lỗi, tự điền của bàn phím điện thoại -->
             <input type="text" name="HoTen" id="name" required placeholder="Nhập họ tên đầy đủ..." autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false">
         </div>
 
@@ -83,15 +83,37 @@
     document.getElementById('hiddenCode').value = uniqueCode;
 
     document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Chặn hành động chuyển trang mặc định của form
+
         const name = document.getElementById('name').value;
         const content = document.getElementById('content').value;
+        const submitBtn = document.getElementById('submitBtn');
 
-        document.getElementById('resCode').innerText = uniqueCode;
-        document.getElementById('resName').innerText = name;
-        document.getElementById('resContent').innerText = content;
+        submitBtn.innerText = "Đang gửi...";
+        submitBtn.disabled = true;
 
-        document.getElementById('requestForm').style.display = 'none';
-        document.getElementById('resultArea').style.display = 'block';
+        // Đóng gói dữ liệu form để gửi ngầm tới Formspree
+        const formData = new FormData(this);
+
+        fetch("https://formspree.io/f/xvkooody", {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            // Hiển thị thông tin và mã đơn ngay lập tức trên trang hiện tại
+            document.getElementById('resCode').innerText = uniqueCode;
+            document.getElementById('resName').innerText = name;
+            document.getElementById('resContent').innerText = content;
+
+            document.getElementById('requestForm').style.display = 'none';
+            document.getElementById('resultArea').style.display = 'block';
+        }).catch(error => {
+            alert("Có lỗi xảy ra khi gửi, vui lòng thử lại!");
+            submitBtn.innerText = "Gửi Yêu Cầu & Tạo Mã";
+            submitBtn.disabled = false;
+        });
     });
 </script>
 
