@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập Yêu Cầu Thiết Kế Web - ST Canhan</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+        
+        .container { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        h2 { color: #007BFF; margin-bottom: 20px; text-align: center; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        input[type="text"], textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        input[type="text"]:focus, textarea:focus { border-color: #007BFF; outline: none; }
+        
+        .btn { display: inline-block; background: #007BFF; color: white; padding: 12px 20px; border: none; border-radius: 4px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn:hover { background: #0056b3; }
+        
+        .back-link { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { text-decoration: underline; }
+
+        /* Khung hiển thị kết quả ngay bên dưới */
+        .result-box { margin-top: 30px; padding: 20px; background: #e9ecef; border-left: 4px solid #007BFF; border-radius: 4px; display: none; }
+        .result-box h3 { color: #2c3e50; margin-bottom: 10px; font-size: 1.2rem; }
+        .result-box p { margin-bottom: 8px; color: #444; }
+        .code-tag { display: inline-block; background: #007BFF; color: white; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-family: monospace; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Nhập Yêu Cầu Thiết Kế Web</h2>
+    
+    <form id="requestForm">
+        <div class="form-group">
+            <label for="name">Họ và tên của bạn:</label>
+            <input type="text" id="name" required placeholder="Nhập họ tên đầy đủ...">
+        </div>
+
+        <div class="form-group">
+            <label for="content">Nội dung / Ý tưởng yêu cầu:</label>
+            <textarea id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web của bạn..."></textarea>
+        </div>
+
+        <button type="submit" class="btn">Gửi Yêu Cầu</button>
+    </form>
+
+    <!-- Khu vực hiển thị thông tin ngay sau khi gửi -->
+    <div class="result-box" id="resultArea">
+        <h3>Gửi yêu cầu thành công!</h3>
+        <p><strong>Mã đơn của bạn:</strong> <span id="resCode" class="code-tag"></span></p>
+        <p><strong>Họ tên:</strong> <span id="resName"></span></p>
+        <p><strong>Nội dung:</strong> <span id="resContent"></span></p>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">* Hãy lưu lại mã đơn này để tiện theo dõi tiến trình tạo trang cá nhân của bạn trên hệ thống.</p>
+    </div>
+
+    <a href="index.html" class="back-link">&larr; Quay lại trang chủ</a>
+</div>
+
+<script>
+    // Hàm tự động tạo mã ngẫu nhiên 5 ký tự (gồm chữ và số, không có ký tự đặc biệt)
+    function generateRandomCode() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < 5; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Chặn tải lại trang mặc định của form
+
+        // Lấy dữ liệu người dùng nhập
+        const name = document.getElementById('name').value;
+        const content = document.getElementById('content').value;
+        
+        // Tạo mã ngẫu nhiên 5 ký tự
+        const randomCode = generateRandomCode();
+
+        // Đổ dữ liệu vào vùng hiển thị bên dưới
+        document.getElementById('resCode').innerText = randomCode;
+        document.getElementById('resName').innerText = name;
+        document.getElementById('resContent').innerText = content;
+
+        // Hiển thị khung kết quả lên
+        document.getElementById('resultArea').style.display = 'block';
+
+        // Cuộn màn hình nhẹ xuống phần kết quả để người dùng dễ nhìn thấy
+        document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
