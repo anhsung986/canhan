@@ -19,13 +19,11 @@
         
         .btn { display: inline-block; background: #007BFF; color: white; padding: 12px 20px; border: none; border-radius: 4px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; text-align: center; text-decoration: none; }
         .btn:hover { background: #0056b3; }
-        .btn-success { background: #28a745; margin-top: 10px; }
-        .btn-success:hover { background: #218838; }
         
         .back-link { display: block; text-align: center; margin-top: 20px; color: #666; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { text-decoration: underline; }
 
-        /* Khung hiển thị kết quả xem trước */
+        /* Khung hiển thị kết quả sau khi gửi */
         .result-box { margin-top: 30px; padding: 20px; background: #e9ecef; border-left: 5px solid #007BFF; border-radius: 4px; display: none; }
         .result-box h3 { color: #2c3e50; margin-bottom: 15px; font-size: 1.2rem; }
         .result-box p { margin-bottom: 10px; color: #444; word-break: break-word; }
@@ -37,36 +35,34 @@
 <div class="container">
     <h2>Nhập Yêu Cầu Thiết Kế Web</h2>
     
-    <form id="requestForm">
+    <!-- Form đã được cấu hình sẵn endpoint của bạn -->
+    <form id="requestForm" action="https://formspree.io/f/xvkooody" method="POST">
+        
+        <!-- Trường ẩn chứa mã đơn tự động để khi gửi email nó đính kèm theo -->
+        <input type="hidden" name="MaDon" id="hiddenCode">
+
         <div class="form-group">
             <label for="name">Họ và tên của bạn:</label>
-            <input type="text" id="name" required placeholder="Nhập họ tên đầy đủ...">
+            <input type="text" name="HoTen" id="name" required placeholder="Nhập họ tên đầy đủ...">
         </div>
 
         <div class="form-group">
             <label for="content">Nội dung / Ý tưởng yêu cầu:</label>
-            <textarea id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web..."></textarea>
+            <textarea name="NoiDung" id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web..."></textarea>
         </div>
 
         <button type="submit" id="submitBtn" class="btn">Gửi Yêu Cầu & Tạo Mã</button>
     </form>
 
-    <!-- Khu vực hiển thị kết quả ngay sau khi bấm tạo -->
+    <!-- Khu vực hiển thị thông tin ngay sau khi bấm gửi -->
     <div class="result-box" id="resultArea">
-        <h3>Tạo yêu cầu thành công!</h3>
+        <h3>Gửi yêu cầu thành công!</h3>
+        <p>Thông tin đã được gửi về hệ thống Email của quản trị viên.</p>
         <p><strong>Mã đơn duy nhất của bạn:</strong></p>
         <div style="margin: 10px 0;"><span id="resCode" class="code-tag"></span></div>
         <p><strong>Họ tên:</strong> <span id="resName"></span></p>
         <p><strong>Nội dung:</strong> <span id="resContent"></span></p>
-        
-        <hr style="margin: 15px 0; border: 0; border-top: 1px solid #ccc;">
-
-        <!-- Nút hành động gửi thông tin -->
-        <p style="font-size: 0.9rem; color: #555; margin-bottom: 10px;">
-            Vui lòng lưu lại thông tin hoặc sao chép mã đơn này gửi cho Admin để tiến hành tạo web:
-        </p>
-        
-        <button id="downloadBtn" class="btn btn-success">Tải về file ghi nhớ đơn hàng (.txt)</button>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">* Vui lòng nhớ mã đơn này để làm mã định danh cho trang web của bạn.</p>
     </div>
 
     <a href="index.html" class="back-link">&larr; Quay lại trang chủ</a>
@@ -83,39 +79,24 @@
         return result;
     }
 
-    let globalCode = '';
-    let globalName = '';
-    let globalContent = '';
+    // Khi trang tải xong, tự động tạo sẵn mã đơn và điền vào ô ẩn
+    const uniqueCode = generateSingleCode();
+    document.getElementById('hiddenCode').value = uniqueCode;
 
     document.getElementById('requestForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Chặn tải lại trang
+        // Lấy thông tin hiển thị ra màn hình cho người dùng thấy ngay
+        const name = document.getElementById('name').value;
+        const content = document.getElementById('content').value;
 
-        globalName = document.getElementById('name').value;
-        globalContent = document.getElementById('content').value;
-        globalCode = generateSingleCode(); // Tạo đúng 1 mã duy nhất
+        document.getElementById('resCode').innerText = uniqueCode;
+        document.getElementById('resName').innerText = name;
+        document.getElementById('resContent').innerText = content;
 
-        // Đổ dữ liệu ra khung xem trước
-        document.getElementById('resCode').innerText = globalCode;
-        document.getElementById('resName').innerText = globalName;
-        document.getElementById('resContent').innerText = globalContent;
-
-        // Hiển thị khung kết quả và ẩn nút tạo để tránh bấm lại
+        // Ẩn form nhập, hiện bảng kết quả thành công
+        document.getElementById('requestForm').style.display = 'none';
         document.getElementById('resultArea').style.display = 'block';
-        document.getElementById('submitBtn').style.display = 'none';
-
-        // Cuộn màn hình xuống vùng kết quả
-        document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Xử lý nút tải file ghi nhớ thông tin về máy
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-        const fileData = `THÔNG TIN YÊU CẦU TẠO WEB CÁ NHÂN\n-----------------------------------\nMã đơn: ${globalCode}\nHọ và tên: ${globalName}\nNội dung yêu cầu: ${globalContent}\n`;
         
-        const blob = new Blob([fileData], { type: 'text/plain;charset=utf-8' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `DonHang_${globalCode}.txt`;
-        link.click();
+        // Formspree sẽ tự động nhận action gửi ngầm dữ liệu đi mà không cần chặn sự kiện submit (để email được gửi đi thành công)
     });
 </script>
 
