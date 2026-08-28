@@ -17,21 +17,31 @@
         input[type="text"], textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
         input[type="text"]:focus, textarea:focus { border-color: #007BFF; outline: none; }
         
+        /* CSS cho phần chọn màu */
+        .color-picker-wrapper { display: flex; align-items: center; gap: 10px; }
+        input[type="color"] { -webkit-appearance: none; border: none; width: 45px; height: 42px; border-radius: 4px; cursor: pointer; background: none; }
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch { border: 1px solid #ccc; border-radius: 4px; }
+
         .btn { display: inline-block; background: #007BFF; color: white; padding: 12px 20px; border: none; border-radius: 4px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.2s; text-align: center; text-decoration: none; }
         .btn:hover { background: #0056b3; }
-        .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .btn-disabled { background: #ccc; cursor: not-allowed; }
         
         .back-link { display: block; text-align: center; margin-top: 20px; color: #666; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { text-decoration: underline; }
 
-        /* Khung thông báo lỗi hoặc giới hạn */
-        .alert-box { padding: 15px; background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; border-radius: 4px; margin-bottom: 20px; display: none; text-align: center; font-weight: bold; }
+        /* Khung thông báo khi quay lại */
+        .welcome-back-box { padding: 20px; background: #e8f4fd; border: 1px solid #b6d4fe; color: #084298; border-radius: 6px; margin-bottom: 20px; display: none; text-align: center; }
+        .welcome-back-box h3 { margin-bottom: 10px; color: #052c65; }
+        .link-box { display: inline-block; background: white; padding: 10px 15px; border: 1px dashed #007BFF; border-radius: 4px; margin: 10px 0; word-break: break-all; }
+        .link-box a { color: #007BFF; font-weight: bold; text-decoration: none; }
+        .link-box a:hover { text-decoration: underline; }
 
-        /* Khung hiển thị kết quả sau khi gửi */
+        /* Khung hiển thị kết quả sau khi gửi lần đầu */
         .result-box { margin-top: 30px; padding: 20px; background: #e9ecef; border-left: 5px solid #007BFF; border-radius: 4px; display: none; }
         .result-box h3 { color: #2c3e50; margin-bottom: 15px; font-size: 1.2rem; }
-        .result-box p { margin-bottom: 10px; color: #444; word-break: break-word; }
         .code-tag { display: inline-block; background: #007BFF; color: white; padding: 6px 14px; border-radius: 4px; font-weight: bold; font-family: monospace; font-size: 1.2rem; letter-spacing: 1px; }
+        .color-preview { display: inline-block; width: 20px; height: 20px; border-radius: 50%; vertical-align: middle; border: 1px solid #ccc; margin-left: 5px; }
     </style>
 </head>
 <body>
@@ -39,13 +49,18 @@
 <div class="container">
     <h2>Nhập Yêu Cầu Thiết Kế Web</h2>
     
-    <!-- Cảnh báo nếu IP đã từng tạo trang -->
-    <div class="alert-box" id="ipAlertBox">
-        ⚠️ Thiết bị (IP) của bạn đã tạo một trang cá nhân trên hệ thống trước đó. Mỗi IP chỉ được phép tạo 1 trang duy nhất!
+    <!-- Khung hiển thị khi người dùng quay lại trang -->
+    <div class="welcome-back-box" id="welcomeBackBox">
+        <h3>👋 Chào mừng bạn quay lại!</h3>
+        <p>Thiết bị của bạn đã đăng ký một trang cá nhân trên hệ thống.</p>
+        <p>Đường dẫn trang cá nhân của bạn:</p>
+        <div class="link-box">
+            <a id="userPersonalLink" href="#" target="_blank"></a>
+        </div>
+        <p style="font-size: 0.85rem; color: #51585e; margin-top: 5px;">Mỗi thiết bị chỉ được phép tạo 1 trang cá nhân duy nhất.</p>
     </div>
 
     <form id="requestForm">
-        <!-- Các trường ẩn chứa mã đơn và IP -->
         <input type="hidden" name="MaDon" id="hiddenCode">
         <input type="hidden" name="UserIP" id="hiddenIP">
 
@@ -55,29 +70,39 @@
         </div>
 
         <div class="form-group">
+            <label for="mauMongMuon">Màu sắc chủ đạo mong muốn:</label>
+            <div class="color-picker-wrapper">
+                <input type="color" name="MauSac" id="mauColor" value="#007BFF">
+                <input type="text" name="MauSacChiTiet" id="mauText" placeholder="Ví dụ: Xanh dương, Hồng pastel hoặc mã #007BFF..." autocomplete="off">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="content">Nội dung / Ý tưởng yêu cầu:</label>
             <textarea name="NoiDung" id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web..." autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
         </div>
 
-        <button type="submit" id="submitBtn" class="btn">Đang kiểm tra thiết bị...</button>
+        <button type="submit" id="submitBtn" class="btn btn-disabled" disabled>Đang kiểm tra thiết bị...</button>
     </form>
 
-    <!-- Khu vực hiển thị kết quả sau khi bấm gửi -->
+    <!-- Khu vực hiển thị kết quả sau khi gửi thành công lần đầu -->
     <div class="result-box" id="resultArea">
         <h3>Gửi yêu cầu thành công!</h3>
         <p>Thông tin đã được gửi về hệ thống Email của quản trị viên.</p>
         <p><strong>Mã đơn duy nhất của bạn:</strong></p>
         <div style="margin: 10px 0;"><span id="resCode" class="code-tag"></span></div>
-        <p><strong>Họ tên:</strong> <span id="resName"></span></p>
-        <p><strong>Nội dung:</strong> <span id="resContent"></span></p>
-        <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">* Vui lòng nhớ mã đơn này để làm mã định danh cho trang web của bạn.</p>
+        <p><strong>Màu mong muốn:</strong> <span id="resColorText"></span> <span id="resColorBox" class="color-preview"></span></p>
+        <p style="margin-top: 10px;"><strong>Đường dẫn trang của bạn sau khi hoàn thiện:</strong></p>
+        <div class="link-box">
+            <a id="newPersonalLink" href="#" target="_blank"></a>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #666; font-style: italic;">* Vui lòng lưu lại đường dẫn và mã đơn này.</p>
     </div>
 
     <a href="index.html" class="back-link">&larr; Quay lại trang chủ</a>
 </div>
 
 <script>
-    // Hàm tạo 1 mã ngẫu nhiên duy nhất 5 ký tự
     function generateSingleCode() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
@@ -90,33 +115,43 @@
     const uniqueCode = generateSingleCode();
     document.getElementById('hiddenCode').value = uniqueCode;
 
-    // Kiểm tra IP và trạng thái đã tạo của trình duyệt người dùng ngay khi vào trang
+    // Đồng bộ giá trị khi người dùng chọn bảng màu
+    const mauColorInput = document.getElementById('mauColor');
+    const mauTextInput = document.getElementById('mauText');
+    
+    mauColorInput.addEventListener('input', function() {
+        mauTextInput.value = this.value;
+    });
+
     window.addEventListener('DOMContentLoaded', async function() {
         const submitBtn = document.getElementById('submitBtn');
         
         try {
-            // Lấy IP công khai của người dùng qua API miễn phí
             const ipResponse = await fetch('https://api.ipify.org?format=json');
             const ipData = await ipResponse.json();
             const userIP = ipData.ip;
 
             document.getElementById('hiddenIP').value = userIP;
 
-            // Kiểm tra trong bộ nhớ trình duyệt (localStorage) xem IP/máy này đã từng tạo chưa
-            const createdIPs = JSON.parse(localStorage.getItem('st_created_ips') || '[]');
+            const savedData = JSON.parse(localStorage.getItem('st_user_site') || 'null');
             
-            if (createdIPs.includes(userIP)) {
-                // Nếu đã tạo rồi -> Khóa form và hiện cảnh báo
-                document.getElementById('ipAlertBox').style.display = 'block';
+            if (savedData && (savedData.ip === userIP || localStorage.getItem('st_has_created'))) {
+                const codeToUse = savedData.code || "STA212";
+                const personalUrl = `https://st.canhan.gt.tc/cn/${codeToUse}/index.html`;
+
+                document.getElementById('userPersonalLink').innerText = personalUrl;
+                document.getElementById('userPersonalLink').href = personalUrl;
+                
+                document.getElementById('welcomeBackBox').style.display = 'block';
                 document.getElementById('requestForm').style.display = 'none';
             } else {
-                // Nếu chưa -> Mở khóa nút gửi
                 submitBtn.innerText = "Gửi Yêu Cầu & Tạo Mã";
+                submitBtn.classList.remove('btn-disabled');
                 submitBtn.disabled = false;
             }
         } catch (error) {
-            // Trường hợp lỗi mạng không lấy được IP vẫn cho phép form hoạt động bình thường
             submitBtn.innerText = "Gửi Yêu Cầu & Tạo Mã";
+            submitBtn.classList.remove('btn-disabled');
             submitBtn.disabled = false;
         }
     });
@@ -125,19 +160,15 @@
         e.preventDefault();
 
         const name = document.getElementById('name').value;
-        const content = document.getElementById('content').value;
-        const userIP = document.getElementById('hiddenIP').value;
+        const colorVal = mauTextInput.value || mauColorInput.value;
         const submitBtn = document.getElementById('submitBtn');
 
         submitBtn.innerText = "Đang gửi...";
         submitBtn.disabled = true;
 
-        // Lưu IP vào bộ nhớ trình duyệt (localStorage) để khóa ngay trên thiết bị này
-        const createdIPs = JSON.parse(localStorage.getItem('st_created_ips') || '[]');
-        createdIPs.push(userIP);
-        localStorage.setItem('st_created_ips', JSON.stringify(createdIPs));
+        localStorage.setItem('st_has_created', 'true');
+        localStorage.setItem('st_user_site', JSON.stringify({ ip: document.getElementById('hiddenIP').value, code: uniqueCode }));
 
-        // Đóng gói dữ liệu gửi ngầm qua Formspree (email của bạn sẽ nhận được cả IP và Mã đơn)
         const formData = new FormData(this);
 
         fetch("https://formspree.io/f/xvkooody", {
@@ -147,9 +178,13 @@
                 'Accept': 'application/json'
             }
         }).then(response => {
+            const personalUrl = `https://st.canhan.gt.tc/cn/${uniqueCode}/index.html`;
+
             document.getElementById('resCode').innerText = uniqueCode;
-            document.getElementById('resName').innerText = name;
-            document.getElementById('resContent').innerText = content;
+            document.getElementById('resColorText').innerText = colorVal;
+            document.getElementById('resColorBox').style.backgroundColor = colorVal;
+            document.getElementById('newPersonalLink').innerText = personalUrl;
+            document.getElementById('newPersonalLink').href = personalUrl;
 
             document.getElementById('requestForm').style.display = 'none';
             document.getElementById('resultArea').style.display = 'block';
