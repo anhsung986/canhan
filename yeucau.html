@@ -78,8 +78,23 @@
         </div>
 
         <div class="form-group">
-            <label for="content">Nội dung / Ý tưởng yêu cầu:</label>
-            <textarea name="NoiDung" id="content" rows="5" required placeholder="Nhập chi tiết yêu cầu thiết kế web..." autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+            <label for="fbLink">Link Facebook cá nhân / Fanpage:</label>
+            <input type="text" name="LinkFacebook" id="fbLink" placeholder="https://facebook.com/..." autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="ttLink">Link TikTok:</label>
+            <input type="text" name="LinkTiktok" id="ttLink" placeholder="https://tiktok.com/@..." autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="ytLink">Link YouTube:</label>
+            <input type="text" name="LinkYoutube" id="ytLink" placeholder="https://youtube.com/@..." autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="content">Nội dung / Ý tưởng yêu cầu khác:</label>
+            <textarea name="NoiDung" id="content" rows="4" placeholder="Nhập chi tiết yêu cầu bổ sung..." autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
         </div>
 
         <button type="submit" id="submitBtn" class="btn btn-disabled" disabled>Đang kiểm tra thiết bị...</button>
@@ -115,7 +130,6 @@
     const uniqueCode = generateSingleCode();
     document.getElementById('hiddenCode').value = uniqueCode;
 
-    // Đồng bộ giá trị khi người dùng chọn bảng màu
     const mauColorInput = document.getElementById('mauColor');
     const mauTextInput = document.getElementById('mauText');
     
@@ -159,7 +173,6 @@
     document.getElementById('requestForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        const name = document.getElementById('name').value;
         const colorVal = mauTextInput.value || mauColorInput.value;
         const submitBtn = document.getElementById('submitBtn');
 
