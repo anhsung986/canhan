@@ -17,8 +17,9 @@
             user-select: none;
         }
 
+        /* Nền Hồng Tươi Sáng */
         body {
-            background: linear-gradient(135deg, #18030e 0%, #2b081e 50%, #10020b 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #feada6 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,33 +30,33 @@
             position: relative;
         }
 
-        /* Hiệu ứng hạt bay nền */
+        /* Container chứa trái tim bay */
         #particles-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
         }
-        .particle {
+        .heart-particle {
             position: absolute;
-            background: rgba(255, 105, 180, 0.6);
-            box-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
-            border-radius: 50%;
+            color: #ff1493;
+            opacity: 0.7;
             pointer-events: none;
-            animation: floatUp linear infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5));
+            animation: floatUp linear forwards;
         }
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 0.9; }
-            80% { opacity: 0.9; }
-            100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
+            0% { transform: translateY(100vh) scale(0.5) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(25deg); opacity: 0; }
         }
 
         /* Hiệu ứng sóng click chuột */
         .click-ripple {
             position: absolute;
-            border: 2px solid #ff69b4;
+            border: 2px solid #ff1493;
             border-radius: 50%;
-            background: rgba(255, 105, 180, 0.2);
+            background: rgba(255, 105, 180, 0.3);
             pointer-events: none;
             transform: translate(-50%, -50%);
             animation: rippleEffect 0.6s cubic-bezier(0, 0.2, 0.8, 1) forwards;
@@ -66,14 +67,14 @@
             100% { width: 90px; height: 90px; opacity: 0; }
         }
 
-        /* Khung kính mờ tông Hồng */
+        /* Khung kính mờ Tông Hồng Trắng Sáng */
         .glass-card {
-            background: rgba(35, 15, 28, 0.55);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border-radius: 30px;
-            border: 1px solid rgba(255, 182, 193, 0.2);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(255, 105, 180, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.5);
             padding: 40px 24px 30px;
             width: 100%;
             max-width: 420px;
@@ -85,14 +86,14 @@
         }
         
         .glass-card.clean-mode {
-            background: rgba(20, 5, 15, 0.95);
+            background: rgba(255, 240, 245, 0.95);
             backdrop-filter: blur(0px);
             -webkit-backdrop-filter: blur(0px);
-            border-color: rgba(255, 105, 180, 0.4);
-            box-shadow: 0 0 35px rgba(255, 105, 180, 0.3);
+            border-color: rgba(255, 105, 180, 0.5);
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.25);
         }
 
-        /* Avatar */
+        /* Avatar Pink */
         .avatar-container {
             position: relative;
             width: 100px;
@@ -116,55 +117,55 @@
         }
         .avatar {
             width: 100%; height: 100%; border-radius: 50%;
-            background: #180812;
+            background: #ffffff;
             display: flex; justify-content: center; align-items: center;
-            color: #ffffff; font-size: 34px; font-weight: 700;
+            color: #ff1493; font-size: 34px; font-weight: 700;
             font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 26px; 
             margin-bottom: 22px; 
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #ffffff 30%, #ff69b4 70%, #ff1493 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            color: #d81b60;
             font-weight: 900;
+            text-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
         }
 
-        /* Danh sách nút */
+        /* Danh sách nút Hồng */
         .button-list { display: flex; flex-direction: column; gap: 14px; }
 
         .btn {
             display: flex; align-items: center; justify-content: space-between;
             padding: 15px 20px; border-radius: 16px;
-            text-decoration: none; font-size: 14px; font-weight: 600; color: #ffffff;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 182, 193, 0.15);
+            text-decoration: none; font-size: 14px; font-weight: 700; color: #ad1457;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.08);
         }
         .btn-left { display: flex; align-items: center; text-align: left; z-index: 1; }
         .btn i { margin-right: 14px; font-size: 18px; width: 22px; text-align: center; }
-        .arrow-icon { font-size: 11px; opacity: 0.4; transition: 0.3s; z-index: 1; }
+        .arrow-icon { font-size: 11px; opacity: 0.5; transition: 0.3s; z-index: 1; color: #d81b60; }
         
         .btn:hover {
-            background: rgba(255, 105, 180, 0.12);
+            background: #ffffff;
             transform: translateY(-3px);
+            color: #ff1493;
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.2);
         }
         .btn:hover .arrow-icon { opacity: 1; transform: translateX(4px); }
 
-        /* Hover nút */
-        .btn-tiktok:hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(255, 0, 85, 0.45); color: #ff6699; }
-        .btn-facebook:hover { border-color: #1877f2; box-shadow: 0 0 25px rgba(24, 119, 242, 0.45); color: #66a3f7; }
-        .btn-youtube:hover { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.45); color: #ff6666; }
-        .btn-status:hover { border-color: #ff1493; box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); color: #ff66b2; }
-        .btn-copy { border-color: rgba(255, 182, 193, 0.3); background: rgba(255, 105, 180, 0.08); }
-        .btn-copy:hover { border-color: #ff69b4; box-shadow: 0 0 25px rgba(255, 105, 180, 0.5); color: #ffb6c1; }
+        .btn-tiktok { color: #e91e63; }
+        .btn-facebook { color: #1976d2; }
+        .btn-youtube { color: #d32f2f; }
+        .btn-status { color: #c2185b; }
+        .btn-copy { background: rgba(255, 240, 245, 0.8); color: #c2185b; border-color: #ffb6c1; }
 
         /* Giao diện Trang phụ */
         .page-section {
@@ -184,37 +185,38 @@
             max-height: 270px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 12px; padding-right: 4px; text-align: left;
         }
         .status-list-container::-webkit-scrollbar { width: 4px; }
-        .status-list-container::-webkit-scrollbar-thumb { background: rgba(255, 105, 180, 0.5); border-radius: 4px; }
+        .status-list-container::-webkit-scrollbar-thumb { background: #ff69b4; border-radius: 4px; }
 
         .status-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 105, 180, 0.25);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             border-radius: 14px; padding: 14px; transition: 0.3s;
         }
         .status-card:hover {
-            background: rgba(255, 105, 180, 0.1); border-color: #ff69b4;
+            background: #ffffff; border-color: #ff1493;
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
         }
         .status-date {
-            font-size: 10px; color: #ffb6c1; margin-bottom: 6px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+            font-size: 10px; color: #d81b60; margin-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px;
         }
         .status-text {
-            font-size: 13px; color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-style: italic;
+            font-size: 13px; color: #880e4f; line-height: 1.5; font-style: italic; font-weight: 500;
         }
 
         .btn-back {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%; padding: 14px; border-radius: 14px;
-            background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 182, 193, 0.2);
-            color: #ffffff; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; margin-top: 5px;
+            background: rgba(255, 255, 255, 0.8); border: 1px solid #ffb6c1;
+            color: #d81b60; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-decoration: none; margin-top: 5px;
         }
-        .btn-back:hover { background: rgba(255, 105, 180, 0.2); border-color: #ff69b4; color: #ff69b4; }
+        .btn-back:hover { background: #ffffff; color: #ff1493; box-shadow: 0 4px 12px rgba(255, 20, 147, 0.2); }
 
         /* Toast thông báo */
         .toast {
             position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #ff1493, #ff69b4); color: #ffffff; 
-            padding: 12px 30px; border-radius: 35px; font-weight: 600; font-size: 13px;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            padding: 12px 30px; border-radius: 35px; font-weight: 700; font-size: 13px;
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
             z-index: 99999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
             width: max-content; max-width: 90%; text-align: center;
         }
@@ -226,18 +228,18 @@
             display: flex; gap: 10px; font-size: 14px; z-index: 10;
         }
         .icon-tag {
-            color: rgba(255, 192, 203, 0.8); cursor: pointer; transition: 0.3s;
+            color: #d81b60; cursor: pointer; transition: 0.3s;
             width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.06); border-radius: 12px; border: 1px solid rgba(255, 182, 193, 0.2);
+            background: rgba(255, 255, 255, 0.7); border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.9);
         }
-        .icon-tag:hover { color: #ff69b4; background: rgba(255, 105, 180, 0.18); border-color: rgba(255, 105, 180, 0.5); }
+        .icon-tag:hover { color: #ff1493; background: #ffffff; box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2); }
 
-        footer { margin-top: 28px; font-size: 10px; color: rgba(255, 192, 203, 0.5); letter-spacing: 2px; }
+        footer { margin-top: 28px; font-size: 10px; color: #c2185b; letter-spacing: 2px; font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <!-- Hiệu ứng hạt nền -->
+    <!-- Hiệu ứng hạt trái tim nền -->
     <div id="particles-container"></div>
 
     <div class="glass-card" id="mainCard">
@@ -272,16 +274,16 @@
 
                 <!-- Nút chuyển sang trang STT -->
                 <div class="btn btn-status" onclick="switchPage('status')">
-                    <span class="btn-left"><i class="fas fa-quote-left" style="color: #ff69b4;"></i> Dòng Trạng Thái (STT)</span>
+                    <span class="btn-left"><i class="fas fa-quote-left" style="color: #ff1493;"></i> Dòng Trạng Thái (STT)</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </div>
 
                 <!-- Nút Copy STK -->
                 <div class="btn btn-copy" onclick="copySTK('0123456789 - MB Bank')">
-                    <span class="btn-left" style="color: #ffb6c1;">
-                        <i class="fas fa-wallet"></i> Số tài khoản
+                    <span class="btn-left">
+                        <i class="fas fa-wallet" style="color: #ff1493;"></i> Số tài khoản
                     </span>
-                    <i class="far fa-copy" style="font-size:13px; opacity:0.7;"></i>
+                    <i class="far fa-copy" style="font-size:13px; opacity:0.8;"></i>
                 </div>
             </div>
         </div>
@@ -289,11 +291,11 @@
         <!-- ================= TRANG TRẠNG THÁI (STT) ================= -->
         <div id="statusPage" class="page-section">
             <div class="avatar-container" style="width: 80px; height: 80px; margin-bottom: 12px;">
-                <div class="avatar" style="font-size: 26px;"><i class="fas fa-heart" style="color: #ff69b4;"></i></div>
+                <div class="avatar" style="font-size: 26px;"><i class="fas fa-heart" style="color: #ff1493;"></i></div>
             </div>
             
             <h1 style="font-size: 20px; margin-bottom: 5px;">DÒNG TRẠNG THÁI</h1>
-            <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Những câu nói & dòng trạng thái cá nhân:</p>
+            <p style="font-size: 11px; color: #ad1457; margin-bottom: 15px; font-weight: 600;">Những câu nói & dòng trạng thái cá nhân:</p>
 
             <div class="status-list-container">
                 <div class="status-card">
@@ -324,23 +326,37 @@
     <div class="toast" id="toastMessage">Đã copy thành công!</div>
 
     <script>
-        // Hiệu ứng hạt bay
+        // Hiệu ứng Trái Tim bay (Giới hạn tối đa 3 - 4 cái)
         const pContainer = document.getElementById('particles-container');
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
+        const MAX_HEARTS = 4; // Giới hạn chỉ có tối đa 4 trái tim trên màn hình
+
+        function createHeart() {
+            // Kiểm tra số lượng trái tim đang hiển thị
+            const currentHearts = pContainer.getElementsByClassName('heart-particle').length;
+            if (currentHearts >= MAX_HEARTS) return;
+
+            const heart = document.createElement('i');
+            heart.classList.add('fas', 'fa-heart', 'heart-particle');
             
-            const size = Math.random() * 4 + 2; 
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
+            // Kích thước ngẫu nhiên từ 12px đến 22px
+            const size = Math.random() * 10 + 12; 
+            heart.style.fontSize = `${size}px`;
             
-            particle.style.left = `${Math.random() * 100}vw`; 
-            particle.style.animationDuration = `${Math.random() * 6 + 4}s`; 
+            // Vị trí xuất hiện ngẫu nhiên theo chiều ngang
+            heart.style.left = `${Math.random() * 90 + 5}vw`; 
             
-            pContainer.appendChild(particle);
-            setTimeout(() => { particle.remove(); }, 10000); 
+            // Thời gian bay chậm nhẹ từ 7s đến 10s
+            const duration = Math.random() * 3 + 7;
+            heart.style.animationDuration = `${duration}s`; 
+            
+            pContainer.appendChild(heart);
+            
+            // Xóa trái tim sau khi kết thúc hiệu ứng
+            setTimeout(() => { heart.remove(); }, duration * 1000); 
         }
-        setInterval(createParticle, 300); 
+
+        // Tạo trái tim mới mỗi 2 giây
+        setInterval(createHeart, 2000);
 
         // Hiệu ứng sóng Click
         window.addEventListener('click', (e) => {
