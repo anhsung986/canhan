@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anh Sùng - Ultimate Hub</title>
-    <!-- Nhúng Font & Icon thế hệ mới -->
+    <!-- Nhúng Font & Icon -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -17,8 +17,9 @@
             user-select: none;
         }
 
+        /* Nền phối kết hợp nhiều tông hồng gradient mềm mại */
         body {
-            background: linear-gradient(135deg, #18030e 0%, #2b081e 50%, #10020b 100%);
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffc0cb 50%, #ffb6c1 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,7 +30,7 @@
             position: relative;
         }
 
-        /* Hiệu ứng hạt bay nền */
+        /* Hiệu ứng hạt bay nền tông hồng đậm nhẹ */
         #particles-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -37,25 +38,25 @@
         }
         .particle {
             position: absolute;
-            background: rgba(255, 105, 180, 0.6);
-            box-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
+            background: rgba(255, 105, 180, 0.4);
+            box-shadow: 0 0 8px rgba(255, 182, 193, 0.8);
             border-radius: 50%;
             pointer-events: none;
             animation: floatUp linear infinite;
         }
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            20% { opacity: 0.9; }
-            80% { opacity: 0.9; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
             100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
         }
 
-        /* Hiệu ứng sóng click chuột */
+        /* Hiệu ứng sóng click chuột hồng nhạt */
         .click-ripple {
             position: absolute;
             border: 2px solid #ff69b4;
             border-radius: 50%;
-            background: rgba(255, 105, 180, 0.2);
+            background: rgba(255, 182, 193, 0.3);
             pointer-events: none;
             transform: translate(-50%, -50%);
             animation: rippleEffect 0.6s cubic-bezier(0, 0.2, 0.8, 1) forwards;
@@ -66,14 +67,14 @@
             100% { width: 90px; height: 90px; opacity: 0; }
         }
 
-        /* Khung kính mờ cao cấp tông Hồng */
+        /* Khung kính mờ sáng tông Hồng Pastel */
         .glass-card {
-            background: rgba(35, 15, 28, 0.55);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 240, 245, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
-            border: 1px solid rgba(255, 182, 193, 0.2);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(255, 105, 180, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 50px rgba(230, 100, 150, 0.25), inset 0 0 20px rgba(255, 255, 255, 0.6);
             padding: 40px 24px 30px;
             width: 100%;
             max-width: 420px;
@@ -85,11 +86,11 @@
         }
         
         .glass-card.clean-mode {
-            background: rgba(20, 5, 15, 0.95);
+            background: rgba(255, 240, 245, 0.95);
             backdrop-filter: blur(0px);
             -webkit-backdrop-filter: blur(0px);
-            border-color: rgba(255, 105, 180, 0.4);
-            box-shadow: 0 0 35px rgba(255, 105, 180, 0.3);
+            border-color: #ffb6c1;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
         }
 
         /* Menu thả xuống */
@@ -100,27 +101,27 @@
             text-align: left;
         }
         .menu-tag {
-            color: rgba(255, 192, 203, 0.8); 
+            color: #d81b60; 
             cursor: pointer; 
             transition: 0.3s;
             font-size: 16px;
             width: 38px; height: 38px;
             display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 12px;
-            border: 1px solid rgba(255, 182, 193, 0.2);
+            border: 1px solid rgba(255, 182, 193, 0.8);
         }
-        .menu-tag:hover { color: #ff69b4; background: rgba(255, 105, 180, 0.18); border-color: rgba(255, 105, 180, 0.5); }
+        .menu-tag:hover { color: #ff1493; background: #ffffff; border-color: #ff69b4; }
 
         .menu-dropdown {
             position: absolute;
             top: 48px; left: 0;
-            background: rgba(24, 8, 18, 0.96);
-            border: 1px solid rgba(255, 182, 193, 0.25);
+            background: rgba(255, 240, 245, 0.98);
+            border: 2px solid #ffb6c1;
             backdrop-filter: blur(20px);
             border-radius: 16px;
             width: 220px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 35px rgba(219, 112, 147, 0.3);
             max-height: 0px; 
             overflow-y: auto; 
             opacity: 0;
@@ -136,26 +137,27 @@
         }
 
         .menu-dropdown::-webkit-scrollbar { width: 4px; }
-        .menu-dropdown::-webkit-scrollbar-thumb { background: rgba(255, 105, 180, 0.5); border-radius: 4px; }
+        .menu-dropdown::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 4px; }
 
         .menu-item {
             display: block;
             padding: 12px 18px;
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.85);
+            color: #c2185b;
+            font-weight: 600;
             text-decoration: none;
             transition: 0.2s;
             cursor: pointer;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 182, 193, 0.3);
         }
         .menu-item:last-child { border-bottom: none; }
         .menu-item:hover {
-            background: rgba(255, 105, 180, 0.15);
-            color: #ff69b4;
+            background: #ffe6f0;
+            color: #ff1493;
             padding-left: 22px;
         }
 
-        /* Avatar */
+        /* Avatar Hồng */
         .avatar-container {
             position: relative;
             width: 100px;
@@ -167,7 +169,7 @@
             position: absolute;
             inset: -4px;
             border-radius: 50%;
-            background: linear-gradient(60deg, #ff1493, #ff69b4, #ffb6c1, #ff1493);
+            background: linear-gradient(60deg, #ff1493, #ff69b4, #ffffff, #ff1493);
             background-size: 300% 300%;
             z-index: -1;
             animation: gradientBorder 5s ease infinite;
@@ -179,11 +181,11 @@
         }
         .avatar {
             width: 100%; height: 100%; border-radius: 50%;
-            background: #180812;
+            background: #fff0f5;
             display: flex; justify-content: center; align-items: center;
-            color: #ffffff; font-size: 34px; font-weight: 700;
+            color: #ff1493; font-size: 34px; font-weight: 700;
             font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+            box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
         }
 
         h1 {
@@ -191,7 +193,7 @@
             font-size: 26px; 
             margin-bottom: 22px; 
             letter-spacing: 2.5px;
-            background: linear-gradient(135deg, #ffffff 30%, #ff69b4 70%, #ff1493 100%);
+            background: linear-gradient(135deg, #d81b60 0%, #ff1493 50%, #ff69b4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 900;
@@ -203,34 +205,37 @@
         .btn {
             display: flex; align-items: center; justify-content: space-between;
             padding: 15px 20px; border-radius: 16px;
-            text-decoration: none; font-size: 14px; font-weight: 600; color: #ffffff;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 182, 193, 0.15);
+            text-decoration: none; font-size: 14px; font-weight: 700; color: #880e4f;
+            background: rgba(255, 255, 255, 0.65);
+            border: 1.5px solid rgba(255, 182, 193, 0.8);
             transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 192, 203, 0.2);
         }
         .btn-left { display: flex; align-items: center; text-align: left; z-index: 1; }
         .btn i { margin-right: 14px; font-size: 18px; width: 22px; text-align: center; }
-        .arrow-icon { font-size: 11px; opacity: 0.4; transition: 0.3s; z-index: 1; }
+        .arrow-icon { font-size: 11px; opacity: 0.5; transition: 0.3s; z-index: 1; }
         
         .btn:hover {
-            background: rgba(255, 105, 180, 0.12);
+            background: #ffffff;
+            border-color: #ff69b4;
             transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+            color: #ff1493;
         }
         .btn:hover .arrow-icon { opacity: 1; transform: translateX(4px); }
 
-        /* Hover màu sắc các nút trong tông Hồng */
-        .btn-discord:hover { border-color: #7289da; box-shadow: 0 0 25px rgba(114, 137, 218, 0.45); color: #99aab5; }
-        .btn-tiktok:hover { border-color: #ff0055; box-shadow: 0 0 25px rgba(255, 0, 85, 0.45); color: #ff6699; }
-        .btn-facebook:hover { border-color: #1877f2; box-shadow: 0 0 25px rgba(24, 119, 242, 0.45); color: #66a3f7; }
-        .btn-youtube:hover { border-color: #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.45); color: #ff6666; }
-        .btn-email:hover { border-color: #ffaa00; box-shadow: 0 0 25px rgba(255, 170, 0, 0.45); color: #ffcc66; }
-        .btn-game:hover { border-color: #ff69b4; box-shadow: 0 0 25px rgba(255, 105, 180, 0.45); color: #ff99cc; }
-        .btn-status:hover { border-color: #ff1493; box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); color: #ff66b2; }
-        .btn-copy { border-color: rgba(255, 182, 193, 0.3); background: rgba(255, 105, 180, 0.08); }
-        .btn-copy:hover { border-color: #ff69b4; box-shadow: 0 0 25px rgba(255, 105, 180, 0.5); color: #ffb6c1; }
+        /* Style màu sắc thương hiệu phối nền Hồng */
+        .btn-discord:hover { border-color: #7289da; color: #5865f2; }
+        .btn-tiktok:hover { border-color: #ff0055; color: #ff0055; }
+        .btn-facebook:hover { border-color: #1877f2; color: #1877f2; }
+        .btn-youtube:hover { border-color: #ff0000; color: #ff0000; }
+        .btn-email:hover { border-color: #ff8c00; color: #ff8c00; }
+        .btn-game:hover { border-color: #ff1493; color: #ff1493; }
+        .btn-status:hover { border-color: #d81b60; color: #d81b60; }
+        .btn-copy { border-color: #ffb6c1; background: rgba(255, 228, 225, 0.8); }
 
         /* Giao diện Trang phụ */
         .page-section {
@@ -251,94 +256,95 @@
             display: flex; flex-direction: column; gap: 10px;
         }
         .email-list-container::-webkit-scrollbar { width: 4px; }
-        .email-list-container::-webkit-scrollbar-thumb { background: rgba(255, 105, 180, 0.5); border-radius: 4px; }
+        .email-list-container::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 4px; }
 
         .email-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255, 105, 180, 0.4);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1.5px dashed #ffb6c1;
             border-radius: 12px; padding: 12px 14px;
             display: flex; align-items: center; justify-content: space-between;
             cursor: pointer; transition: 0.3s; text-align: left;
         }
-        .email-box.main-email { border: 1.5px solid #ff69b4; background: rgba(255, 105, 180, 0.12); }
-        .email-box:hover { background: rgba(255, 105, 180, 0.2); border-color: #ffb6c1; }
+        .email-box.main-email { border: 2px solid #ff69b4; background: #fff0f5; }
+        .email-box:hover { background: #ffffff; border-color: #ff1493; }
         .email-info { display: flex; flex-direction: column; gap: 2px; }
-        .email-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: max-content; padding: 1px 6px; border-radius: 4px; }
-        .badge-main { background: #ff69b4; color: #18030e; }
-        .badge-sub { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.7); }
-        .email-text { font-size: 13px; color: #ffb6c1; font-weight: 600; word-break: break-all; }
+        .email-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; width: max-content; padding: 2px 6px; border-radius: 4px; }
+        .badge-main { background: #ff69b4; color: #ffffff; }
+        .badge-sub { background: #ffb6c1; color: #880e4f; }
+        .email-text { font-size: 13px; color: #ad1457; font-weight: 700; word-break: break-all; }
 
         /* Style Trang Game */
         .unlock-box {
-            background: rgba(255, 105, 180, 0.08);
-            border: 1px solid rgba(255, 105, 180, 0.3);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1.5px solid #ffb6c1;
             border-radius: 14px; padding: 12px; margin-bottom: 15px; display: flex; gap: 8px;
         }
         .pass-input {
             flex: 1; padding: 10px 12px; border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 105, 180, 0.4);
-            color: #ffffff; font-size: 12px; outline: none; transition: 0.3s;
+            background: #ffffff; border: 1px solid #ffb6c1;
+            color: #880e4f; font-size: 12px; font-weight: 600; outline: none; transition: 0.3s;
         }
-        .pass-input:focus { border-color: #ff69b4; box-shadow: 0 0 10px rgba(255, 105, 180, 0.4); }
+        .pass-input::placeholder { color: #f48fb1; }
+        .pass-input:focus { border-color: #ff1493; box-shadow: 0 0 8px rgba(255, 20, 147, 0.3); }
         .btn-submit {
-            padding: 0 14px; border-radius: 10px; background: #ff69b4; color: #18030e;
+            padding: 0 14px; border-radius: 10px; background: #ff69b4; color: #ffffff;
             font-weight: 700; font-size: 12px; border: none; cursor: pointer; transition: 0.3s;
         }
-        .btn-submit:hover { background: #ffb6c1; box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); }
+        .btn-submit:hover { background: #ff1493; box-shadow: 0 0 10px rgba(255, 105, 180, 0.4); }
 
         .game-list-container {
             max-height: 260px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; text-align: left;
         }
         .game-list-container::-webkit-scrollbar { width: 4px; }
-        .game-list-container::-webkit-scrollbar-thumb { background: rgba(255, 105, 180, 0.5); border-radius: 4px; }
+        .game-list-container::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 4px; }
         
         .game-box {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 105, 180, 0.3);
+            background: rgba(255, 255, 255, 0.6); border: 1.5px solid #ffb6c1;
             border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;
-            color: #ffffff; font-size: 13px; transition: 0.3s;
+            color: #880e4f; font-size: 13px; transition: 0.3s;
         }
-        .game-box:hover { background: rgba(255, 105, 180, 0.12); border-color: #ff69b4; }
-        .game-title { color: #ff69b4; font-weight: 700; font-family: 'Orbitron', sans-serif; font-size: 13px; display: flex; align-items: center; gap: 8px; }
-        .game-info { color: rgba(255, 255, 255, 0.7); font-size: 12px; }
-        .secret-pass { color: #ff1493; background: rgba(255, 20, 147, 0.15); padding: 1px 6px; border-radius: 4px; font-family: monospace; }
+        .game-box:hover { background: #ffffff; border-color: #ff69b4; }
+        .game-title { color: #d81b60; font-weight: 700; font-family: 'Orbitron', sans-serif; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .game-info { color: #ad1457; font-size: 12px; font-weight: 600; }
+        .secret-pass { color: #ff1493; background: #ffe6f0; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: 700; }
 
-        /* Style Trang STT (Status) */
+        /* Style Trang STT */
         .status-list-container {
             max-height: 270px; overflow-y: auto; margin-bottom: 15px; display: flex; flex-direction: column; gap: 12px; padding-right: 4px; text-align: left;
         }
         .status-list-container::-webkit-scrollbar { width: 4px; }
-        .status-list-container::-webkit-scrollbar-thumb { background: rgba(255, 105, 180, 0.5); border-radius: 4px; }
+        .status-list-container::-webkit-scrollbar-thumb { background: #ffb6c1; border-radius: 4px; }
 
         .status-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 105, 180, 0.25);
+            background: rgba(255, 255, 255, 0.65);
+            border: 1.5px solid #ffb6c1;
             border-radius: 14px; padding: 14px; transition: 0.3s;
             position: relative;
         }
         .status-card:hover {
-            background: rgba(255, 105, 180, 0.1); border-color: #ff69b4;
+            background: #ffffff; border-color: #ff69b4;
         }
         .status-date {
-            font-size: 10px; color: #ffb6c1; margin-bottom: 6px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+            font-size: 11px; color: #d81b60; margin-bottom: 6px; font-weight: 700; display: flex; align-items: center; gap: 6px;
         }
         .status-text {
-            font-size: 13px; color: rgba(255, 255, 255, 0.9); line-height: 1.5; font-style: italic;
+            font-size: 13px; color: #880e4f; line-height: 1.5; font-style: italic; font-weight: 600;
         }
 
         .btn-back {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             width: 100%; padding: 14px; border-radius: 14px;
-            background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 182, 193, 0.2);
-            color: #ffffff; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; margin-top: 5px;
+            background: rgba(255, 255, 255, 0.7); border: 1.5px solid #ffb6c1;
+            color: #c2185b; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; text-decoration: none; margin-top: 5px;
         }
-        .btn-back:hover { background: rgba(255, 105, 180, 0.2); border-color: #ff69b4; color: #ff69b4; }
+        .btn-back:hover { background: #ffffff; border-color: #ff1493; color: #ff1493; }
 
         /* Toast thông báo */
         .toast {
             position: fixed; bottom: -60px; left: 50%; transform: translateX(-50%);
             background: linear-gradient(135deg, #ff1493, #ff69b4); color: #ffffff; 
-            padding: 12px 30px; border-radius: 35px; font-weight: 600; font-size: 13px;
-            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5);
+            padding: 12px 30px; border-radius: 35px; font-weight: 700; font-size: 13px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
             z-index: 99999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0;
             width: max-content; max-width: 90%; text-align: center;
         }
@@ -350,13 +356,13 @@
             display: flex; gap: 10px; font-size: 14px; z-index: 10;
         }
         .icon-tag {
-            color: rgba(255, 192, 203, 0.8); cursor: pointer; transition: 0.3s;
+            color: #d81b60; cursor: pointer; transition: 0.3s;
             width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.06); border-radius: 12px; border: 1px solid rgba(255, 182, 193, 0.2);
+            background: rgba(255, 255, 255, 0.7); border-radius: 12px; border: 1px solid rgba(255, 182, 193, 0.8);
         }
-        .icon-tag:hover { color: #ff69b4; background: rgba(255, 105, 180, 0.18); border-color: rgba(255, 105, 180, 0.5); }
+        .icon-tag:hover { color: #ff1493; background: #ffffff; border-color: #ff69b4; }
 
-        footer { margin-top: 28px; font-size: 10px; color: rgba(255, 192, 203, 0.5); letter-spacing: 2px; }
+        footer { margin-top: 28px; font-size: 10px; color: #ad1457; letter-spacing: 2px; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -396,46 +402,46 @@
 
             <div class="button-list">
                 <a href="https://discord.gg/rdCDxxeTQ" target="_blank" class="btn btn-discord">
-                    <span class="btn-left"><i class="fab fa-discord"></i> Discord</span>
+                    <span class="btn-left"><i class="fab fa-discord" style="color:#5865f2;"></i> Discord</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </a>
                 <a href="https://www.tiktok.com/@tuanh212op" target="_blank" class="btn btn-tiktok">
-                    <span class="btn-left"><i class="fab fa-tiktok"></i> Kênh TikTok</span>
+                    <span class="btn-left"><i class="fab fa-tiktok" style="color:#ff0055;"></i> Kênh TikTok</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </a>
                 <a href="https://www.facebook.com/anh.tuan.879658/" target="_blank" class="btn btn-facebook">
-                    <span class="btn-left"><i class="fab fa-facebook-f"></i> Facebook Cá Nhân</span>
+                    <span class="btn-left"><i class="fab fa-facebook-f" style="color:#1877f2;"></i> Facebook Cá Nhân</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </a>
                 <a href="https://m.youtube.com/@AnhVN_MC" target="_blank" class="btn btn-youtube">
-                    <span class="btn-left"><i class="fab fa-youtube"></i> Kênh YouTube</span>
+                    <span class="btn-left"><i class="fab fa-youtube" style="color:#ff0000;"></i> Kênh YouTube</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </a>
 
-                <!-- Nút chuyển sang trang STT mới -->
+                <!-- Nút chuyển sang trang STT -->
                 <div class="btn btn-status" onclick="switchPage('status')">
-                    <span class="btn-left"><i class="fas fa-quote-left" style="color: #ff69b4;"></i> Dòng Trạng Thái (STT)</span>
+                    <span class="btn-left"><i class="fas fa-quote-left" style="color: #ff1493;"></i> Dòng Trạng Thái (STT)</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </div>
                 
                 <!-- Nút chuyển sang trang Email -->
                 <div class="btn btn-email" onclick="switchPage('email')">
-                    <span class="btn-left"><i class="fas fa-envelope"></i> Danh Sách Email</span>
+                    <span class="btn-left"><i class="fas fa-envelope" style="color: #ff8c00;"></i> Danh Sách Email</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </div>
 
                 <!-- Nút chuyển sang trang Game -->
                 <div class="btn btn-game" onclick="switchPage('game')">
-                    <span class="btn-left"><i class="fas fa-gamepad" style="color: #ff69b4;"></i> Danh Sách Game</span>
+                    <span class="btn-left"><i class="fas fa-gamepad" style="color: #ff1493;"></i> Danh Sách Game</span>
                     <i class="fas fa-chevron-right arrow-icon"></i>
                 </div>
 
                 <!-- Nút Copy STK -->
                 <div class="btn btn-copy" id="donateBtn" onclick="copySTK('0123456789 - MB Bank')">
-                    <span class="btn-left" style="color: #ffb6c1;">
-                        <i class="fas fa-wallet"></i> Số tài khoản
+                    <span class="btn-left" style="color: #ad1457;">
+                        <i class="fas fa-wallet" style="color:#d81b60;"></i> Số tài khoản
                     </span>
-                    <i class="far fa-copy" style="font-size:13px; opacity:0.7;"></i>
+                    <i class="far fa-copy" style="font-size:13px; color:#d81b60;"></i>
                 </div>
             </div>
         </div>
@@ -443,11 +449,11 @@
         <!-- ================= TRANG TRẠNG THÁI (STT) ================= -->
         <div id="statusPage" class="page-section">
             <div class="avatar-container" style="width: 80px; height: 80px; margin-bottom: 12px;">
-                <div class="avatar" style="font-size: 26px;"><i class="fas fa-heart" style="color: #ff69b4;"></i></div>
+                <div class="avatar" style="font-size: 26px;"><i class="fas fa-heart" style="color: #ff1493;"></i></div>
             </div>
             
             <h1 style="font-size: 20px; margin-bottom: 5px;">DÒNG TRẠNG THÁI</h1>
-            <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Những câu nói & dòng trạng thái cá nhân:</p>
+            <p style="font-size: 11px; color: #ad1457; margin-bottom: 15px; font-weight: 600;">Những câu nói & dòng trạng thái cá nhân:</p>
 
             <div class="status-list-container">
                 <div class="status-card">
@@ -474,11 +480,11 @@
         <!-- ================= TRANG EMAIL ================= -->
         <div id="emailPage" class="page-section">
             <div class="avatar-container" style="width: 80px; height: 80px; margin-bottom: 12px;">
-                <div class="avatar" style="font-size: 26px;"><i class="fas fa-envelope" style="color: #ff69b4;"></i></div>
+                <div class="avatar" style="font-size: 26px;"><i class="fas fa-envelope" style="color: #ff1493;"></i></div>
             </div>
             
             <h1 style="font-size: 20px; margin-bottom: 5px;">DANH SÁCH EMAIL</h1>
-            <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 10px;">Bấm vào từng email để sao chép nhanh:</p>
+            <p style="font-size: 11px; color: #ad1457; margin-bottom: 10px; font-weight: 600;">Bấm vào từng email để sao chép nhanh:</p>
 
             <div class="email-list-container">
                 <div class="email-box main-email" onclick="copyEmail('anhsung986@gmail.com')">
@@ -486,7 +492,7 @@
                         <span class="email-badge badge-main">Email Chính</span>
                         <span class="email-text">anhsung986@gmail.com</span>
                     </div>
-                    <i class="far fa-copy" style="color: #ff69b4; font-size: 14px;"></i>
+                    <i class="far fa-copy" style="color: #ff1493; font-size: 14px;"></i>
                 </div>
                 
                 <div class="email-box" onclick="copyEmail('Anhvnmc7@gmail.com')">
@@ -521,12 +527,12 @@
 
         <!-- ================= TRANG GAME ================= -->
         <div id="gamePage" class="page-section">
-            <div class="avatar-container" style="width: 80px; height: 80px; margin-bottom: 15px; border-radius: 50%; background: #180812; display: flex; justify-content: center; align-items: center; border: 2px solid #ff69b4; box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);">
-                <i class="fas fa-gamepad" style="font-size: 30px; color: #ff69b4;"></i>
+            <div class="avatar-container" style="width: 80px; height: 80px; margin-bottom: 15px; border-radius: 50%; background: #fff0f5; display: flex; justify-content: center; align-items: center; border: 2px solid #ff69b4; box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);">
+                <i class="fas fa-gamepad" style="font-size: 30px; color: #ff1493;"></i>
             </div>
             
             <h1 style="font-size: 20px; margin-bottom: 5px;">DANH SÁCH GAME</h1>
-            <p style="font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Tên game và tài khoản hiển thị sẵn. Nhập mật khẩu để mở khóa MK:</p>
+            <p style="font-size: 11px; color: #ad1457; margin-bottom: 15px; font-weight: 600;">Tên game và tài khoản hiển thị sẵn. Nhập mật khẩu để mở khóa MK:</p>
 
             <!-- Khung nhập mật khẩu -->
             <div class="unlock-box">
@@ -572,7 +578,7 @@
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            const size = Math.random() * 4 + 2; 
+            const size = Math.random() * 5 + 3; 
             particle.style.width = `${size}px`;
             particle.style.height = `${size}px`;
             
@@ -596,7 +602,7 @@
             setTimeout(() => { ripple.remove(); }, 600);
         });
 
-        // Chuyển đổi giữa các trang (Home, Status, Email, Game)
+        // Chuyển đổi giữa các trang
         function switchPage(pageId) {
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.remove('active'));
@@ -666,13 +672,13 @@
 
         function unlockPasswords() {
             const inputVal = document.getElementById('passInput').value;
-            const correctPass = '290112012';
+            const correctPass = 'sungtuananh2012@toiyeutoi';
 
             if (inputVal === correctPass) {
-                document.getElementById('pass1').innerText = '';
-                document.getElementById('pass2').innerText = '';
-                document.getElementById('pass3').innerText = '';
-                document.getElementById('pass4').innerText = '';
+                document.getElementById('pass1').innerText = 'sungtuananh2012@toiyeutoi';
+                document.getElementById('pass2').innerText = 'sungtuananh2012@toiyeutoi';
+                document.getElementById('pass3').innerText = 'sungtuananh2012@toiyeutoi';
+                document.getElementById('pass4').innerText = 'sungtuananh2012@toiyeutoi';
                 
                 showToast("🔓 Đã mở khóa hiển thị mật khẩu!");
             } else {
