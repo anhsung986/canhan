@@ -13,8 +13,8 @@
         }
 
         body {
-            background-color: #050505;
-            color: #ffffff;
+            background-color: #f2f5f4;
+            color: #1a2421;
             font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
             display: flex;
@@ -23,15 +23,15 @@
             padding: 20px;
         }
 
-        /* Khung Embed chính với viền & bóng màu #016844 */
+        /* Khung Embed chính nền sáng */
         .embed-card {
             width: 100%;
             max-width: 440px;
-            background: linear-gradient(145deg, #091310, #050a08);
-            border: 1px solid #016844;
+            background: #ffffff;
+            border: 1px solid rgba(1, 104, 68, 0.2);
             border-radius: 24px;
             padding: 28px 24px;
-            box-shadow: 0 20px 40px rgba(1, 104, 68, 0.25), 0 0 0 1px rgba(1, 104, 68, 0.2) inset;
+            box-shadow: 0 15px 35px rgba(1, 104, 68, 0.12), 0 0 0 1px rgba(1, 104, 68, 0.05) inset;
             position: relative;
             overflow: hidden;
         }
@@ -43,8 +43,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #016844, #33a876, #016844, transparent);
+            height: 4px;
+            background: linear-gradient(90deg, #016844, #219668, #016844);
         }
 
         /* Phần thông tin đầu khung */
@@ -54,16 +54,15 @@
             gap: 16px;
             margin-bottom: 24px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(1, 104, 68, 0.3);
+            border-bottom: 1px solid #eef3f1;
         }
 
         .embed-avatar {
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: rgba(1, 104, 68, 0.15);
-            border: 2px solid #016844;
-            color: #33a876;
+            background: #016844;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,7 +70,7 @@
             font-weight: 700;
             letter-spacing: 1px;
             flex-shrink: 0;
-            box-shadow: 0 0 15px rgba(1, 104, 68, 0.4);
+            box-shadow: 0 6px 16px rgba(1, 104, 68, 0.25);
         }
 
         .embed-meta {
@@ -82,16 +81,17 @@
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #33a876;
+            color: #016844;
+            font-weight: 600;
             margin-bottom: 4px;
         }
 
         .embed-name {
             font-size: 1.25rem;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            color: #ffffff;
+            color: #121f1a;
         }
 
         /* Danh sách nút Embed dạng thanh ngang */
@@ -103,30 +103,33 @@
         }
 
         .embed-btn {
-            background-color: rgba(1, 104, 68, 0.1);
-            border: 1px solid rgba(1, 104, 68, 0.3);
+            background-color: #f7faf9;
+            border: 1px solid #e1ebe7;
             border-radius: 12px;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
-            color: #ffffff;
+            color: #1a2421;
             transition: all 0.25s ease;
             cursor: pointer;
         }
 
         .embed-btn:hover {
             background-color: #016844;
-            border-color: #33a876;
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(1, 104, 68, 0.4);
+            border-color: #016844;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(1, 104, 68, 0.2);
         }
 
         .embed-btn.disabled {
-            opacity: 0.35;
+            opacity: 0.4;
             cursor: not-allowed;
             pointer-events: none;
+            background-color: #f2f2f2;
+            border-color: #e5e5e5;
         }
 
         .btn-content {
@@ -134,7 +137,7 @@
             align-items: center;
             gap: 12px;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .btn-content svg {
@@ -145,7 +148,7 @@
         }
 
         .btn-arrow {
-            color: #33a876;
+            color: #016844;
             font-size: 0.85rem;
             transition: color 0.2s;
         }
@@ -160,20 +163,21 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.7rem;
-            color: #33a876;
+            color: #61756e;
             padding-top: 12px;
-            border-top: 1px solid rgba(1, 104, 68, 0.3);
+            border-top: 1px solid #eef3f1;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 500;
         }
 
         .status-dot {
             display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #33a876;
+            width: 7px;
+            height: 7px;
+            background-color: #016844;
             border-radius: 50%;
-            box-shadow: 0 0 8px #33a876;
+            box-shadow: 0 0 6px rgba(1, 104, 68, 0.6);
             margin-right: 6px;
         }
     </style>
@@ -261,14 +265,15 @@
             const originalText = textSpan.innerText;
             
             textSpan.innerText = "✓ Đã Sao Chép!";
-            element.style.borderColor = "#33a876";
+            element.style.backgroundColor = "#016844";
+            element.style.color = "#ffffff";
             
             setTimeout(() => {
                 textSpan.innerText = originalText;
-                element.style.borderColor = "rgba(1, 104, 68, 0.3)";
+                element.style.backgroundColor = "#f7faf9";
+                element.style.color = "#1a2421";
             }, 1500);
         }
     </script>
 </body>
-  </html>
-  
+</html>
