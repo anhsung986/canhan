@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pà Rubi - Profile Embed</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,9 +12,9 @@
             box-sizing: border-box;
         }
 
-        /* Nền chuyển màu chính hòa quyện giữa Xanh Sky Blue và Hồng Hot Pink */
+        /* Nền trang hòa quyện tuyệt đẹp giữa Sky Blue và Hot Pink */
         body {
-            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%);
+            background: linear-gradient(135deg, #02ccfe 0%, #8a2be2 50%, #ff028d 100%);
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
@@ -26,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* Đốm sáng mờ ảo hỗ trợ lan tỏa sắc màu đều ở 2 góc */
+        /* Đốm sáng mờ ảo lan tỏa đều ở các góc */
         body::before {
             content: '';
             position: absolute;
@@ -35,8 +35,8 @@
             width: 500px;
             height: 500px;
             background: #02ccfe;
-            filter: blur(120px);
-            opacity: 0.6;
+            filter: blur(130px);
+            opacity: 0.55;
             border-radius: 50%;
             z-index: 0;
         }
@@ -49,31 +49,31 @@
             width: 500px;
             height: 500px;
             background: #ff028d;
-            filter: blur(120px);
-            opacity: 0.6;
+            filter: blur(130px);
+            opacity: 0.55;
             border-radius: 50%;
             z-index: 0;
         }
 
-        /* Khung Embed dạng kính mờ sáng, phối mượt 2 màu */
+        /* Khung Embed kính mờ (Glassmorphism) */
         .embed-card {
             width: 100%;
             max-width: 420px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
             border-radius: 28px;
             padding: 28px 24px;
-            box-shadow: 0 15px 35px rgba(2, 204, 254, 0.3),
-                        0 15px 35px rgba(255, 2, 141, 0.3),
+            box-shadow: 0 20px 40px rgba(2, 204, 254, 0.25),
+                        0 20px 40px rgba(255, 2, 141, 0.25),
                         0 0 0 1px rgba(255, 255, 255, 0.2) inset;
             position: relative;
             z-index: 1;
             overflow: hidden;
         }
 
-        /* Viền sáng trắng hồng nhẹ trên cùng card */
+        /* Viền sáng mượt mà phía trên card */
         .embed-card::before {
             content: '';
             position: absolute;
@@ -81,7 +81,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.3), #ffffff);
+            background: linear-gradient(90deg, #02ccfe, #ffffff, #ff028d);
         }
 
         /* Header Profile */
@@ -91,10 +91,10 @@
             gap: 16px;
             margin-bottom: 24px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Avatar kết hợp gradient sắc nét */
+        /* Avatar kết hợp Gradient sắc nét */
         .embed-avatar {
             width: 62px;
             height: 62px;
@@ -145,8 +145,8 @@
         }
 
         .embed-btn {
-            background-color: rgba(255, 255, 255, 0.22);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 14px;
             padding: 13px 18px;
             display: flex;
@@ -160,16 +160,15 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        /* Hover hòa quyện màu nổi bật mà không bị tối */
         .embed-btn:hover {
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.38);
             border-color: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
 
         .embed-btn.disabled {
-            opacity: 0.45;
+            opacity: 0.4;
             cursor: not-allowed;
             pointer-events: none;
         }
@@ -211,7 +210,7 @@
             color: #ffffff;
             font-weight: 600;
             padding-top: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
             letter-spacing: 1px;
             opacity: 0.95;
