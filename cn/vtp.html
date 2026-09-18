@@ -12,7 +12,7 @@
             box-sizing: border-box;
         }
 
-        /* Khóa cứng kích thước trang vừa đúng 1 màn hình */
+        /* Khóa nền 100% màn hình, phủ dải màuGradient tràn viền */
         html, body {
             width: 100%;
             height: 100vh;
@@ -27,21 +27,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px;
+            padding: 16px;
             position: relative;
         }
 
-        /* Đốm sáng mờ ảo gọn trong màn hình */
+        /* Hiệu ứng đốm sáng lung linh xung quanh */
         body::before {
             content: '';
             position: absolute;
             top: -10%;
             right: -10%;
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             background: #02ccfe;
-            filter: blur(70px);
-            opacity: 0.5;
+            filter: blur(80px);
+            opacity: 0.6;
             border-radius: 50%;
             pointer-events: none;
         }
@@ -51,72 +51,74 @@
             position: absolute;
             bottom: -10%;
             left: -10%;
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             background: #ff028d;
-            filter: blur(70px);
-            opacity: 0.5;
+            filter: blur(80px);
+            opacity: 0.6;
             border-radius: 50%;
             pointer-events: none;
         }
 
-        /* Khung Embed tự động co giãn vừa màn hình */
+        /* Khung Embed TO HƠN, RÕ HƠN */
         .embed-card {
-            width: 100%;
-            max-width: 360px;
-            max-height: calc(100dvh - 24px);
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
-            border-radius: 20px;
-            padding: 18px 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 92%;
+            max-width: 440px; /* Tăng độ rộng để to rõ hơn */
+            max-height: calc(100dvh - 32px);
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            border-radius: 24px;
+            padding: 24px 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),
+                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
             position: relative;
             z-index: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow-y: auto;
         }
 
-        /* Viền sáng trắng phía trên card */
+        /* Viền sáng trên cùng card */
         .embed-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.3), #ffffff);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.4), #ffffff);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
         }
 
-        /* Header Profile thu gọn nhẹ */
+        /* Header Profile thiết kế to đẹp hơn */
         .embed-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            gap: 16px;
+            margin-bottom: 18px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .embed-avatar {
-            width: 48px;
-            height: 48px;
+            width: 58px;
+            height: 58px;
             border-radius: 50%;
             background: linear-gradient(135deg, #02ccfe, #ff028d);
-            border: 2px solid #ffffff;
+            border: 2.5px solid #ffffff;
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 800;
             letter-spacing: 1px;
             flex-shrink: 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         .embed-meta {
@@ -124,36 +126,37 @@
         }
 
         .embed-tag {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 1px;
-            opacity: 0.9;
+            margin-bottom: 3px;
+            opacity: 0.95;
         }
 
         .embed-name {
-            font-size: 1.05rem;
+            font-size: 1.3rem; /* Chữ to rõ ràng hơn */
             font-weight: 800;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Danh sách nút khoảng cách vừa vặn */
+        /* Danh sách nút bấm to & dễ bấm */
         .embed-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .embed-btn {
-            background-color: rgba(255, 255, 255, 0.22);
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 12px;
-            padding: 9px 12px;
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1.2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 14px;
+            padding: 13px 16px; /* Tăng khoảng cách nút */
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -167,7 +170,7 @@
 
         .embed-btn:active {
             transform: scale(0.98);
-            background-color: rgba(255, 255, 255, 0.35);
+            background-color: rgba(255, 255, 255, 0.4);
         }
 
         .embed-btn.disabled {
@@ -179,21 +182,21 @@
         .btn-content {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            gap: 12px;
+            font-size: 0.95rem; /* Font chữ danh mục to dễ đọc */
+            font-weight: 700;
         }
 
         .btn-content svg {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             fill: #ffffff;
             flex-shrink: 0;
         }
 
         .btn-arrow {
             color: #ffffff;
-            font-size: 0.8rem;
+            font-size: 1rem;
             font-weight: 700;
         }
 
@@ -202,24 +205,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.65rem;
+            font-size: 0.75rem;
             color: #ffffff;
-            font-weight: 600;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            font-weight: 700;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.95;
         }
 
         .status-dot {
             display: inline-block;
-            width: 5px;
-            height: 5px;
-            background-color: #ffffff;
+            width: 7px;
+            height: 7px;
+            background-color: #00ff87;
             border-radius: 50%;
-            box-shadow: 0 0 6px #ffffff;
-            margin-right: 4px;
+            box-shadow: 0 0 8px #00ff87;
+            margin-right: 6px;
         }
     </style>
 </head>
