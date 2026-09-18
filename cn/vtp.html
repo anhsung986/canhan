@@ -6,42 +6,41 @@
     <title>Pà Rubi - Profile Embed</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Sửa lỗi lòi dải màu ở đáy bằng cách phủ Gradient cố định lên cả HTML & BODY */
-        html {
-            height: 100%;
-            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%) no-repeat center center fixed;
-            background-size: cover;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Khóa cứng kích thước trang vừa đúng 1 màn hình */
+        html, body {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%);
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100vh;
-            min-height: 100dvh; /* Dynamic Viewport Height cho mobile */
-            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%) no-repeat center center fixed;
-            background-size: cover;
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
-            box-sizing: border-box;
+            padding: 12px;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Đốm sáng mờ ảo */
+        /* Đốm sáng mờ ảo gọn trong màn hình */
         body::before {
             content: '';
             position: absolute;
-            top: -15%;
-            right: -15%;
-            width: 300px;
-            height: 300px;
+            top: -10%;
+            right: -10%;
+            width: 250px;
+            height: 250px;
             background: #02ccfe;
-            filter: blur(80px);
+            filter: blur(70px);
             opacity: 0.5;
             border-radius: 50%;
             pointer-events: none;
@@ -50,36 +49,37 @@
         body::after {
             content: '';
             position: absolute;
-            bottom: -15%;
-            left: -15%;
-            width: 300px;
-            height: 300px;
+            bottom: -10%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
             background: #ff028d;
-            filter: blur(80px);
+            filter: blur(70px);
             opacity: 0.5;
             border-radius: 50%;
             pointer-events: none;
         }
 
-        /* Khung Embed dạng kính mờ */
+        /* Khung Embed tự động co giãn vừa màn hình */
         .embed-card {
             width: 100%;
-            max-width: 380px;
+            max-width: 360px;
+            max-height: calc(100dvh - 24px);
             background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1.5px solid rgba(255, 255, 255, 0.4);
-            border-radius: 24px;
-            padding: 24px 20px;
-            box-shadow: 0 15px 35px rgba(2, 204, 254, 0.25),
-                        0 15px 35px rgba(255, 2, 141, 0.25),
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            border-radius: 20px;
+            padding: 18px 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 1;
-            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Viền sáng trắng mượt trên cùng card */
+        /* Viền sáng trắng phía trên card */
         .embed-card::before {
             content: '';
             position: absolute;
@@ -88,24 +88,23 @@
             width: 100%;
             height: 3px;
             background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.3), #ffffff);
-            border-top-left-radius: 24px;
-            border-top-right-radius: 24px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
 
-        /* Header Profile */
+        /* Header Profile thu gọn nhẹ */
         .embed-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
         }
 
-        /* Avatar */
         .embed-avatar {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: linear-gradient(135deg, #02ccfe, #ff028d);
             border: 2px solid #ffffff;
@@ -113,11 +112,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 700;
             letter-spacing: 1px;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
         .embed-meta {
@@ -125,42 +124,42 @@
         }
 
         .embed-tag {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             opacity: 0.9;
         }
 
         .embed-name {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             color: #ffffff;
         }
 
-        /* Danh sách nút */
+        /* Danh sách nút khoảng cách vừa vặn */
         .embed-links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .embed-btn {
             background-color: rgba(255, 255, 255, 0.22);
             border: 1px solid rgba(255, 255, 255, 0.35);
             border-radius: 12px;
-            padding: 11px 15px;
+            padding: 9px 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             text-decoration: none;
             color: #ffffff;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             cursor: pointer;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -180,21 +179,21 @@
         .btn-content {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 8px;
+            font-size: 0.8rem;
             font-weight: 600;
         }
 
         .btn-content svg {
-            width: 17px;
-            height: 17px;
+            width: 15px;
+            height: 15px;
             fill: #ffffff;
             flex-shrink: 0;
         }
 
         .btn-arrow {
             color: #ffffff;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
         }
 
@@ -203,10 +202,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #ffffff;
             font-weight: 600;
-            padding-top: 12px;
+            padding-top: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.25);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -215,12 +214,12 @@
 
         .status-dot {
             display: inline-block;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background-color: #ffffff;
             border-radius: 50%;
-            box-shadow: 0 0 8px #ffffff;
-            margin-right: 5px;
+            box-shadow: 0 0 6px #ffffff;
+            margin-right: 4px;
         }
     </style>
 </head>
