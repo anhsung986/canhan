@@ -25,7 +25,7 @@
             overflow: hidden;
         }
 
-        /* Đốm sáng hiệu ứng mờ kết hợp 2 màu Blue & Pink phía sau */
+        /* Đốm sáng mờ ảo kết hợp 2 màu Blue & Pink phía sau */
         body::before {
             content: '';
             position: absolute;
@@ -38,7 +38,7 @@
             z-index: 0;
         }
 
-        /* Khung Embed chính với viền chuyển màu Neon */
+        /* Khung Embed chính với hiệu ứng kính mờ (Glassmorphism) */
         .embed-card {
             width: 100%;
             max-width: 440px;
@@ -249,15 +249,6 @@
                 </div>
                 <div class="btn-arrow">📋</div>
             </div>
-
-            <!-- Danh Sách Game -->
-            <a href="#game" onclick="alert('Danh sách game đang cập nhật!')" class="embed-btn">
-                <div class="btn-content">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m-2-2v4M15 11h.01M18 13h.01"/></svg>
-                    Danh Sách Game
-                </div>
-                <div class="btn-arrow">↗</div>
-            </a>
 
             <!-- Số tài khoản -->
             <div class="embed-btn" onclick="copyText('1234567890', this)">
