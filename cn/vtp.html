@@ -6,39 +6,43 @@
     <title>Pà Rubi - Profile Embed</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Reset hoàn toàn lề để không bị tràn lề phải/dưới */
-        html, body {
-            width: 100%;
+        /* Sửa lỗi lòi dải màu ở đáy bằng cách phủ Gradient cố định lên cả HTML & BODY */
+        html {
             height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Cấm tuyệt đối cuộn thừa gây lệch nền */
-            background-color: #7b66ec; /* Màu nền dự phòng */
+            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%) no-repeat center center fixed;
+            background-size: cover;
         }
 
         body {
-            /* Nền Gradient cố định trải đều toàn màn hình */
-            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%);
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic Viewport Height cho mobile */
+            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%) no-repeat center center fixed;
+            background-size: cover;
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 16px;
+            box-sizing: border-box;
             position: relative;
+            overflow: hidden;
         }
 
-        /* Đốm sáng mờ ảo nằm gói gọn inside body */
+        /* Đốm sáng mờ ảo */
         body::before {
             content: '';
             position: absolute;
-            top: -20%;
-            right: -20%;
-            width: 350px;
-            height: 350px;
+            top: -15%;
+            right: -15%;
+            width: 300px;
+            height: 300px;
             background: #02ccfe;
-            filter: blur(90px);
-            opacity: 0.6;
+            filter: blur(80px);
+            opacity: 0.5;
             border-radius: 50%;
             pointer-events: none;
         }
@@ -46,18 +50,18 @@
         body::after {
             content: '';
             position: absolute;
-            bottom: -20%;
-            left: -20%;
-            width: 350px;
-            height: 350px;
+            bottom: -15%;
+            left: -15%;
+            width: 300px;
+            height: 300px;
             background: #ff028d;
-            filter: blur(90px);
-            opacity: 0.6;
+            filter: blur(80px);
+            opacity: 0.5;
             border-radius: 50%;
             pointer-events: none;
         }
 
-        /* Khung Embed dạng kính mờ sáng */
+        /* Khung Embed dạng kính mờ */
         .embed-card {
             width: 100%;
             max-width: 380px;
