@@ -12,13 +12,13 @@
             box-sizing: border-box;
         }
 
-        /* Khóa nền 100% màn hình, phủ dải màuGradient tràn viền */
+        /* Khóa nền 100% màn hình, phủ dải màu Gradient tràn viền theo màu mới */
         html, body {
             width: 100%;
             height: 100vh;
             height: 100dvh;
             overflow: hidden;
-            background: linear-gradient(135deg, #02ccfe 0%, #7b66ec 50%, #ff028d 100%);
+            background: linear-gradient(135deg, #80daeb 0%, #cc2211 50%, #ff82ce 100%);
         }
 
         body {
@@ -31,7 +31,7 @@
             position: relative;
         }
 
-        /* Hiệu ứng đốm sáng lung linh xung quanh */
+        /* Hiệu ứng đốm sáng lung linh xung quanh phối theo bộ màu */
         body::before {
             content: '';
             position: absolute;
@@ -39,7 +39,7 @@
             right: -10%;
             width: 300px;
             height: 300px;
-            background: #02ccfe;
+            background: #80daeb;
             filter: blur(80px);
             opacity: 0.6;
             border-radius: 50%;
@@ -53,17 +53,17 @@
             left: -10%;
             width: 300px;
             height: 300px;
-            background: #ff028d;
+            background: #ff82ce;
             filter: blur(80px);
             opacity: 0.6;
             border-radius: 50%;
             pointer-events: none;
         }
 
-        /* Khung Embed TO HƠN, RÕ HƠN */
+        /* Khung Embed */
         .embed-card {
             width: 92%;
-            max-width: 440px; /* Tăng độ rộng để to rõ hơn */
+            max-width: 440px;
             max-height: calc(100dvh - 32px);
             background: rgba(255, 255, 255, 0.22);
             backdrop-filter: blur(25px);
@@ -89,12 +89,12 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.4), #ffffff);
+            background: linear-gradient(90deg, #80daeb, #ff82ce, #ffffff);
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
         }
 
-        /* Header Profile thiết kế to đẹp hơn */
+        /* Header Profile */
         .embed-header {
             display: flex;
             align-items: center;
@@ -108,7 +108,7 @@
             width: 58px;
             height: 58px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #02ccfe, #ff028d);
+            background: linear-gradient(135deg, #80daeb, #cc2211, #ff82ce);
             border: 2.5px solid #ffffff;
             color: #ffffff;
             display: flex;
@@ -136,7 +136,7 @@
         }
 
         .embed-name {
-            font-size: 1.3rem; /* Chữ to rõ ràng hơn */
+            font-size: 1.3rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -144,7 +144,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Danh sách nút bấm to & dễ bấm */
+        /* Danh sách nút bấm */
         .embed-links {
             display: flex;
             flex-direction: column;
@@ -156,7 +156,7 @@
             background-color: rgba(255, 255, 255, 0.25);
             border: 1.2px solid rgba(255, 255, 255, 0.4);
             border-radius: 14px;
-            padding: 13px 16px; /* Tăng khoảng cách nút */
+            padding: 13px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -183,7 +183,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 0.95rem; /* Font chữ danh mục to dễ đọc */
+            font-size: 0.95rem;
             font-weight: 700;
         }
 
@@ -218,9 +218,9 @@
             display: inline-block;
             width: 7px;
             height: 7px;
-            background-color: #00ff87;
+            background-color: #80daeb;
             border-radius: 50%;
-            box-shadow: 0 0 8px #00ff87;
+            box-shadow: 0 0 8px #80daeb;
             margin-right: 6px;
         }
     </style>
@@ -306,4 +306,5 @@
         }
     </script>
 </body>
-</html>
+                        </html>
+                        
