@@ -129,10 +129,9 @@
                     else if(fileNameLower.endsWith('.mp4')) icon = '🎬';
                     else if(fileNameLower.endsWith('.html')) icon = '🌐';
                     
-                    // Cắt bỏ đuôi file (từ dấu chấm cuối cùng) và viết hoa toàn bộ
+                    // Cắt bỏ đuôi file (từ dấu chấm cuối cùng) và viết hoa toàn bộ để hiển thị
                     const displayName = file.name.replace(/\.[^/.]+$/, "").toUpperCase();
                     
-                    // file.name gốc vẫn được giữ lại trong handleFileClick để điều hướng đúng link
                     const card = `
                         <a onclick="handleFileClick('${file.name}')" class="card">
                             <span class="icon">${icon}</span>
@@ -146,15 +145,18 @@
             }
         }
 
-        // Hàm xử lý khi bấm vào thẻ file
+        // Hàm xử lý khi bấm vào thẻ file (tự động loại bỏ đuôi .html khi tạo đường dẫn)
         function handleFileClick(fileName) {
             const overlay = document.getElementById('overlay');
-            const targetUrl = `https://st.canhan.gt.tc/cn/${fileName}`;
             
-            // Hiển thị khung chờ
+            // Xóa phần mở rộng khỏi tên file (ví dụ: htkt.html thành htkt)
+            const cleanName = fileName.replace(/\.[^/.]+$/, "");
+            const targetUrl = `https://st.canhan.gt.tc/cn/${cleanName}`;
+            
+            // Hiển thị khung chờ [ Đang kiểm tra thông tin... ]
             overlay.classList.add('active');
             
-            // Đợi 1.5 giây rồi chuyển hướng
+            // Đợi 1.5 giây rồi chuyển hướng đến link sạch không có đuôi .html
             setTimeout(() => {
                 window.location.href = targetUrl;
             }, 1500); 
