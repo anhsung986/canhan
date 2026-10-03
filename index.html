@@ -3,80 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Web Cá Nhân - ST Canhan</title>
+    <title>Không Gian Cá Nhân</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; color: #333; line-height: 1.6; }
-        header { background: linear-gradient(135deg, #007BFF, #0056b3); color: white; padding: 60px 20px; text-align: center; }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
-        
-        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        
-        .section-title { font-size: 1.8rem; margin-bottom: 20px; color: #2c3e50; border-bottom: 2px solid #007BFF; padding-bottom: 5px; display: inline-block; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        
-        .card { background: white; border-radius: 8px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        
-        /* CSS cho ảnh thu nhỏ mẫu web */
-        .preview-img-container { width: 100%; height: 220px; overflow: hidden; border-radius: 6px; margin-bottom: 15px; background: #0a0514; display: flex; justify-content: center; align-items: center; border: 1px solid #ddd; }
-        .preview-img-container img { width: 100%; height: 100%; object-fit: contain; }
-
-        .card h3 { color: #007BFF; margin-bottom: 10px; }
-        .card p { color: #666; font-size: 0.95rem; margin-bottom: 15px; }
-        
-        .btn { display: inline-block; background: #007BFF; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; transition: background 0.2s; text-align: center; width: 100%; }
-        .btn:hover { background: #0056b3; }
-        
-        .btn-outline { background: transparent; border: 2px solid #007BFF; color: #007BFF; }
-        .btn-outline:hover { background: #007BFF; color: white; }
-
-        footer { text-align: center; padding: 20px; color: #777; font-size: 0.9rem; border-top: 1px solid #ddd; margin-top: 40px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh; display: flex; justify-content: center;
+            align-items: center; color: #ffffff; padding: 20px;
+        }
+        .dashboard {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2); padding: 50px 40px;
+            width: 100%; max-width: 900px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; font-weight: 300; color: rgba(255, 255, 255, 0.85); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .card {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 30px 20px; text-align: center; text-decoration: none;
+            color: #ffffff; transition: all 0.4s ease; display: flex; flex-direction: column;
+            align-items: center; position: relative; overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px); background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .icon { font-size: 3.5rem; margin-bottom: 15px; transition: transform 0.3s ease; }
+        .card:hover .icon { transform: scale(1.1); }
+        .title { font-size: 1.2rem; font-weight: 400; word-break: break-word; }
+        #loading { text-align: center; font-size: 1.2rem; width: 100%; grid-column: 1 / -1; }
+        .error { color: #ff6b6b; text-align: center; width: 100%; grid-column: 1 / -1; }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Hệ Thống Web Cá Nhân</h1>
-        <p>Nền tảng tạo và quản lý trang web cá nhân chuyên nghiệp, nhanh chóng.</p>
-    </header>
-
-    <div class="container">
-        <!-- Phần giới thiệu / Chức năng chính -->
-        <div style="text-align: center; margin-bottom: 40px;">
-            <h2 style="margin-bottom: 15px;">Bạn muốn có một trang web của riêng mình?</h2>
-            <p style="color: #666; max-width: 600px; margin: 0 auto 20px auto;">Hãy gửi yêu cầu ngay để hệ thống tự động khởi tạo mã định danh và thiết kế không gian cá nhân cho riêng bạn.</p>
-            <a href="yeucau.html" class="btn" style="width: auto;">Nhập yêu cầu thiết kế ngay</a>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Trang Chủ Cá Nhân</h1>
+            <p>Tự động cập nhật tài liệu từ thư mục <strong>cn</strong> trên GitHub</p>
         </div>
-
-        <h2 class="section-title">Danh sách mẫu nổi bật</h2>
-        <div class="grid">
-            <!-- Mẫu 1: STA212 -->
-            <div class="card">
-                <!-- Khung hiển thị ảnh thu nhỏ -->
-                <div class="preview-img-container">
-                    <img src="image/mau1.png" alt="Mẫu giao diện STA212">
-                </div>
-
-                <h3>Mẫu Cá Nhân (STA212)</h3>
-                <p>Trang web cá nhân mẫu dạng Link-in-Bio theo phong cách tối ưu trực quan trên điện thoại.</p>
-                <a href="cn/STA212/sta.html" class="btn btn-outline">Xem chi tiết</a>
-            </div>
-
-            <!-- Mẫu bổ sung (Sắp ra mắt) -->
-            <div class="card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 350px;">
-                <h3 style="color: #888;">Sắp ra mắt mẫu mới</h3>
-                <p>Nhiều giao diện và mẫu web cá nhân độc đáo khác đang được cập nhật thêm.</p>
-                <span style="color: #aaa; font-style: italic;">Đang cập nhật...</span>
-            </div>
+        <div class="grid" id="file-grid">
+            <div id="loading">⏳ Đang quét thư mục cn...</div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 ST Canhan. All rights reserved.</p>
-    </footer>
+    <script>
+        // --- BẠN CHỈ CẦN SỬA 2 DÒNG NÀY ---
+        const githubUsername = 'TEN_TAI_KHOAN_GITHUB_CUA_BAN'; 
+        const repoName = 'TEN_KHO_LUU_TRU_CUA_BAN';
+        // ----------------------------------
 
+        const folderPath = 'cn'; // Tên thư mục chứa file
+        const apiURL = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${folderPath}`;
+
+        async function fetchGitHubFiles() {
+            const grid = document.getElementById('file-grid');
+            
+            try {
+                const response = await fetch(apiURL);
+                
+                if (!response.ok) {
+                    throw new Error('Không tìm thấy thư mục hoặc repo bị Private');
+                }
+                
+                const files = await response.json();
+                grid.innerHTML = ''; 
+                
+                if(files.length === 0) {
+                    grid.innerHTML = '<div style="text-align:center; width:100%;">Thư mục cn hiện đang trống.</div>';
+                    return;
+                }
+                
+                files.forEach(file => {
+                    let icon = '📄'; 
+                    const fileName = file.name.toLowerCase();
+                    
+                    if (file.type === 'dir') icon = '📁';
+                    else if(fileName.endsWith('.jpg') || fileName.endsWith('.png') || fileName.endsWith('.gif')) icon = '🖼️';
+                    else if(fileName.endsWith('.pdf')) icon = '📕';
+                    else if(fileName.endsWith('.xlsx') || fileName.endsWith('.csv')) icon = '📊';
+                    else if(fileName.endsWith('.mp4')) icon = '🎬';
+                    else if(fileName.endsWith('.html')) icon = '🌐';
+                    
+                    // html_url sẽ dẫn thẳng đến trang xem file đó trên GitHub
+                    const card = `
+                        <a href="${file.html_url}" class="card" target="_blank">
+                            <span class="icon">${icon}</span>
+                            <span class="title">${file.name}</span>
+                        </a>
+                    `;
+                    grid.innerHTML += card;
+                });
+            } catch (error) {
+                grid.innerHTML = `<div class="error">Lỗi: ${error.message}. Hãy chắc chắn bạn đã nhập đúng tên Username, Repo và Repo đang để chế độ Public.</div>`;
+            }
+        }
+
+        fetchGitHubFiles();
+    </script>
 </body>
 </html>
