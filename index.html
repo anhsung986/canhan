@@ -52,12 +52,11 @@
     </div>
 
     <script>
-        // --- BẠN CHỈ CẦN SỬA 2 DÒNG NÀY ---
-        const githubUsername = 'TEN_TAI_KHOAN_GITHUB_CUA_BAN'; 
-        const repoName = 'TEN_KHO_LUU_TRU_CUA_BAN';
-        // ----------------------------------
+        // Đã cập nhật chính xác tài khoản và kho lưu trữ của bạn
+        const githubUsername = 'anhsung986'; 
+        const repoName = 'canhan';
+        const folderPath = 'cn'; 
 
-        const folderPath = 'cn'; // Tên thư mục chứa file
         const apiURL = `https://api.github.com/repos/${githubUsername}/${repoName}/contents/${folderPath}`;
 
         async function fetchGitHubFiles() {
@@ -67,13 +66,13 @@
                 const response = await fetch(apiURL);
                 
                 if (!response.ok) {
-                    throw new Error('Không tìm thấy thư mục hoặc repo bị Private');
+                    throw new Error('Thư mục "cn" chưa tồn tại hoặc bên trong chưa có file nào');
                 }
                 
                 const files = await response.json();
                 grid.innerHTML = ''; 
                 
-                if(files.length === 0) {
+                if(!Array.isArray(files) || files.length === 0) {
                     grid.innerHTML = '<div style="text-align:center; width:100%;">Thư mục cn hiện đang trống.</div>';
                     return;
                 }
@@ -89,7 +88,6 @@
                     else if(fileName.endsWith('.mp4')) icon = '🎬';
                     else if(fileName.endsWith('.html')) icon = '🌐';
                     
-                    // html_url sẽ dẫn thẳng đến trang xem file đó trên GitHub
                     const card = `
                         <a href="${file.html_url}" class="card" target="_blank">
                             <span class="icon">${icon}</span>
@@ -99,7 +97,7 @@
                     grid.innerHTML += card;
                 });
             } catch (error) {
-                grid.innerHTML = `<div class="error">Lỗi: ${error.message}. Hãy chắc chắn bạn đã nhập đúng tên Username, Repo và Repo đang để chế độ Public.</div>`;
+                grid.innerHTML = `<div class="error">Lỗi: ${error.message}. <br><br>Vui lòng tạo một thư mục tên <strong>cn</strong> và tải lên ít nhất 1 file vào đó.</div>`;
             }
         }
 
